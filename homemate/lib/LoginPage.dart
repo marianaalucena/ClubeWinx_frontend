@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/ResetSenha.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Color.fromRGBO(244, 244, 244, 5),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(30.0),
         child: Align(
@@ -19,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
             //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-
              Icon(Icons.house_outlined, size: 150, color: Color.fromRGBO(133, 102, 170, 4)),
               RichText(
                 textAlign: TextAlign.center,
@@ -39,15 +39,16 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 10,
               ),
-              TextField(
+              TextFormField(
+                validator: _validarEmail,
                 autofocus: true,
-                obscureText: true,
                 keyboardType: TextInputType.emailAddress,
                 style: TextStyle(
                     color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
                 decoration: InputDecoration(
                   labelText: "Email",
                   labelStyle: TextStyle(color: Colors.black),
+
                 ),
               ),
 
@@ -67,6 +68,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               FlatButton(
                 child: Text("Esqueceu a senha?", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 4)), textAlign: TextAlign.start,),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResetSenha()),
+                  );
+                },
               ),
 
               SizedBox(
@@ -103,5 +110,17 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  String _validarEmail(String value) {
+    String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Informe o Email";
+    } else if(!regExp.hasMatch(value)){
+      return "Email inválido";
+    }else {
+      return null;
+    }
   }
 }
