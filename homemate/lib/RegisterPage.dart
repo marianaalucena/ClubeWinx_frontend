@@ -1,4 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import 'LoginPage.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -361,7 +364,12 @@ class _RegisterPageState extends State<RegisterPage> {
             text: 'Já tem cadastro? ',
             style: TextStyle(color: Colors.black, fontSize: 15),
             children: <TextSpan>[
-              TextSpan(text: 'Entre', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(133, 102, 170, 4),)),
+              TextSpan(text: 'Entre', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(133, 102, 170, 4),),
+                  recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                  ),
+              ),
             ],
           ),
         ),
