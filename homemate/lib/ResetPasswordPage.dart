@@ -66,7 +66,7 @@ class _ResetSenhaState extends State<ResetSenha> {
                 ),
               ),
               RaisedButton(
-                onPressed: _validateInputs,
+                onPressed: _clickButton,
                 child: Container(
                   height: 20,
                   child: Text("RECUPERAR A SENHA", textAlign: TextAlign.center,
@@ -109,7 +109,7 @@ class _ResetSenhaState extends State<ResetSenha> {
     _emailController.dispose();
   }
 
-  void _validateInputs() {
+  void _clickButton() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       _formToJson();

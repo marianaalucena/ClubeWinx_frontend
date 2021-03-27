@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/HomePage.dart';
 import 'package:homemate/RegisterPage.dart';
 import 'package:homemate/ResetPasswordPage.dart';
+
+import 'LoginAPI.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,6 +20,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _autoValidate = false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(1.0),
                     side: BorderSide(color: Color.fromRGBO(105, 131, 170, 2),)),
-                onPressed: _validateInputs,
+                onPressed: _clickButton,
               ),
               SizedBox(
                 height: 20,
@@ -160,29 +169,28 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _formToJson() {
-    Map<String, dynamic> loginUser = Map();
-    loginUser["email"] = _emailController.text;
-    loginUser["senha"] = _passwordController.text;
-    String json = jsonEncode(loginUser);
-
-    print(json);
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
-  void _validateInputs() {
+  _clickButton() {
     if(_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      _formToJson();
+
+      String email = _emailController.text;
+      String password = _passwordController.text;
+      print("email: $email senha: $password");
+
+      //chamando a API
+      var response = LoginAPI.login(email, password);
+
+      //falta implementar o if que dependera do response acima
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
 
     } else {
       _autoValidate = true;
     }
+
+
   }
 
 }
