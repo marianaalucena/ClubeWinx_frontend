@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:homemate/RegisterPage.dart';
 
 import 'HomemateSplash.dart';
-import 'LoginPage.dart';
 
 
 void main (){

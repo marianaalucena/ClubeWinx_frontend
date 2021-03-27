@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:homemate/NovaSenha.dart';
+import 'package:homemate/NewPasswordPage.dart';
 
 class ResetSenha extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class ResetSenha extends StatefulWidget {
 }
 
 class _ResetSenhaState extends State<ResetSenha> {
+  final _emailController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +37,15 @@ class _ResetSenhaState extends State<ResetSenha> {
                 ),
               ),
               SizedBox(
+                height: 40,
+              ),
+              Text("Uma nova senha será enviada para o seu email", style: TextStyle(fontSize: 20),),
+              SizedBox(
                 height: 20,
               ),
               TextField(
+                controller: _emailController,
                 autofocus: true,
-                obscureText: true,
                 keyboardType: TextInputType.visiblePassword,
                 style: TextStyle(
                     color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -46,12 +55,7 @@ class _ResetSenhaState extends State<ResetSenha> {
                 ),
               ),
               RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NovaSenha()),
-                  );
-                },
+                onPressed: _login,
                 child: Container(
                   height: 20,
                   child: Text("RECUPERAR A SENHA", textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),),
@@ -66,5 +70,30 @@ class _ResetSenhaState extends State<ResetSenha> {
         ),
       ),
     );
+  }
+
+  String _validarEmail(String value) {
+    String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Informe o Email";
+    } else if(!regExp.hasMatch(value)){
+      return "Email inválido";
+    }else {
+      return null;
+    }
+  }
+
+  void _login(){
+    Map<String, dynamic> loginUser = Map();
+    loginUser["email"] = _emailController.text;
+    String json = jsonEncode(loginUser);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NovaSenha()),
+    );
+
+    print(json);
   }
 }
