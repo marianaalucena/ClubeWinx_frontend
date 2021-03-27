@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:homemate/ResetSenha.dart';
+import 'package:homemate/ResetPasswordPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               TextFormField(
+                controller: _emailController,
                 validator: _validarEmail,
                 autofocus: true,
                 keyboardType: TextInputType.emailAddress,
@@ -56,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               TextField(
+                controller: _passwordController,
                 autofocus: true,
                 obscureText: true,
                 keyboardType: TextInputType.visiblePassword,
@@ -66,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   labelStyle: TextStyle(color: Colors.black),
                 ),
               ),
-              FlatButton(
+              TextButton(
                 child: Text("Esqueceu a senha?", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 4)), textAlign: TextAlign.start,),
                 onPressed: () {
                   Navigator.push(
@@ -75,12 +82,10 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
               ),
-
               SizedBox(
                 height: 40,
               ),
               RaisedButton(
-                onPressed: () {},
                child: Container(
                 height: 20,
                 child: Text("ENTRAR", textAlign: TextAlign.center, style: TextStyle(color: Colors.white),),),
@@ -89,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(1.0),
                     side: BorderSide(color: Color.fromRGBO(105, 131, 170, 2),)),
+                onPressed: _login,
               ),
               SizedBox(
                 height: 20,
@@ -123,4 +129,12 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
   }
+
+  void _login(){
+    Map<String, dynamic> loginUser = Map();
+    loginUser["email"] = _emailController.text;
+    loginUser["senha"] = _passwordController.text;
+    String json = jsonEncode(loginUser);
+
+    print(json);
 }
