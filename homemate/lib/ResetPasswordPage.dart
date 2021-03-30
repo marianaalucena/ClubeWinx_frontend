@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/NewPasswordPage.dart';
 
-class ResetSenha extends StatefulWidget {
+class ResetPasswordPage extends StatefulWidget {
   @override
-  _ResetSenhaState createState() => _ResetSenhaState();
+  _ResetPasswordPageState createState() => _ResetPasswordPageState();
 }
 
-class _ResetSenhaState extends State<ResetSenha> {
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
@@ -43,10 +43,10 @@ class _ResetSenhaState extends State<ResetSenha> {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 50,
               ),
-              Text("Uma nova senha será enviada para o seu email",
-                style: TextStyle(fontSize: 20),),
+              Text("Um código será enviado para o seu email",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
               SizedBox(
                 height: 20,
               ),
@@ -71,7 +71,7 @@ class _ResetSenhaState extends State<ResetSenha> {
                   height: 20,
                   child: Text("RECUPERAR A SENHA", textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white),),),
-                color: Color.fromRGBO(105, 131, 170, 2),
+                color: Color.fromRGBO(133, 102, 170, 4),
                 elevation: 3.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(1.0),
@@ -113,6 +113,10 @@ class _ResetSenhaState extends State<ResetSenha> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       _formToJson();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewPasswordPage()),
+      );
     } else {
       _autoValidate = true;
     }
