@@ -178,42 +178,44 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _showRegisterConfirmation() async {
-    return showDialog(
-      context: context,
-      builder: (param) {
-        return AlertDialog(
-          title: Text("Confirmação do Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
-          content: SingleChildScrollView(
-            child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))
+    if (_autoValidate == false) {
+      return showDialog(
+          context: context,
+          builder: (param) {
+            return AlertDialog(
+              title: Text("Confirmação do Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
+              content: SingleChildScrollView(
+                child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),
               ),
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage())
-                );
-              },
-              child: Text("Confirmar"),
-            ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
-                elevation: MaterialStateProperty.all(0.0)
-              ),
-              onPressed: (){
-                Navigator.of(context).pop();
-              },
-              child: Text("Cancelar", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),
-            ),
-          ],
-          backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-        );
-      }
-    );
+              actions: <Widget>[
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))
+                  ),
+                  onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage())
+                    );
+                  },
+                  child: Text("Confirmar"),
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
+                      elevation: MaterialStateProperty.all(0.0)
+                  ),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cancelar", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),
+                ),
+              ],
+              backgroundColor: Color.fromRGBO(244, 244, 244, 5),
+            );
+          }
+      );
+    }
   }
 
   void _showRegisterQuitMessage() async {
@@ -507,9 +509,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   onPressed: () {
                     _validateInputs();
-                    if (_autoValidate == false) {
-                      _showRegisterConfirmation();
-                    }
+                    _showRegisterConfirmation();
+                    ScaffoldMessenger.of(context)
+                      ..removeCurrentSnackBar()
+                      ..showSnackBar(SnackBar(content: Text("Cadastro realizado com sucesso.")));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
