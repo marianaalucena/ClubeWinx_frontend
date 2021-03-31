@@ -1,23 +1,27 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/ProfilePage.dart';
 
-import 'LoginPage.dart';
 
 
-class RegisterPage extends StatefulWidget {
+
+class EditProfilePage extends StatefulWidget {
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _EditProfilePageState extends State<EditProfilePage> {
 
   final _formKey = GlobalKey<FormState>();      //cria uma chave global que identifica unicamente o Form
   bool _autoValidate = false;
+  var _selectedGender;
+  final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
 
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
   TextEditingController _cepController = TextEditingController();
   TextEditingController _streetAdresstController = TextEditingController();
   TextEditingController _numberAdressController = TextEditingController();
@@ -26,19 +30,20 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _stateAdressController = TextEditingController();
   TextEditingController _cityAdressController = TextEditingController();
 
+
   String _validateName(String name) {
     Pattern textPattern = r"^[a-zA-Z ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
-    String validateMessage = null;
+    String validateMessage;
 
     if(name.length == 0) {
       validateMessage = "Este campo precisa ser preenchido.";
 
     } else if(name.length < 3) {
-      validateMessage = "O Nome precisa ser maior que 2 caracteres.";
+      validateMessage = "Este campo precisa ser maior que 2 caracteres.";
 
     } else if(name.length > 30) {
-      validateMessage = "O Nome precisa ser menor que 30 caracteres.";
+      validateMessage = "Este campo precisa ser menor que 30 caracteres.";
 
     } else if(!regex.hasMatch(name)) {
       validateMessage = "Valor inválido.";
@@ -48,16 +53,31 @@ class _RegisterPageState extends State<RegisterPage> {
     return validateMessage;
   }
 
+  String _validateDate(String date) {
+    Pattern datePattern = r"^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4}$";
+    RegExp regex = new RegExp(datePattern);
+    String validateMessage;
+
+    if(date.length == 0) {
+      validateMessage = "Esse campo precisa ser preenchido.";
+
+    } else if (!regex.hasMatch(date)) {
+      validateMessage = "Valor inválido.";
+    }
+
+    return validateMessage;
+  }
+
   String _validateEmail(String email) {
     Pattern emailPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regex = new RegExp(emailPattern);
-    String validateMessage = null;
+    String validateMessage;
 
     if(email.length == 0) {
-      validateMessage = "Este campo precisa ser preenchido.";
+      validateMessage = "Esse campo precisa ser preenchido.";
 
     } else if(email.length < 3) {
-      validateMessage = "O E-mail precisa ser maior que 2 caracteres.";
+      validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
 
     } else if(!regex.hasMatch(email)) {
       validateMessage = "Valor inválido.";
@@ -68,13 +88,13 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validatePassword(String password) {
-    String validateMessage = null;
+    String validateMessage;
 
     if(password.length == 0) {
-      validateMessage = "Este campo precisa ser preenchido.";
+      validateMessage = "Esse campo precisa ser preenchido.";
 
     } else if(password.length < 8) {
-      validateMessage = "A senha precisa ter pelo menos 8 caracteres.";
+      validateMessage = "Esse campo precisa ter pelo menos 8 caracteres.";
     }
 
     return validateMessage;
@@ -95,27 +115,9 @@ class _RegisterPageState extends State<RegisterPage> {
   String _validateCep(String cep) {
     Pattern cepPattern = r'(^(\d{5})[-](\d{3})$)?';
     RegExp regex = new RegExp(cepPattern);
-    String validateMessage = null;
+    String validateMessage;
 
     if(!regex.hasMatch(cep)) {
-      validateMessage = "Valor inválido.";
-    }
-
-    return validateMessage;
-  }
-
-  String _validateStreetAdress(String streetAdress) {
-    Pattern streetAdressPattern = r"^[a-zA-Z ,.'-]+$";
-    RegExp regex = new RegExp(streetAdressPattern);
-    String validateMessage = null;
-
-    if (streetAdress.length == 0) {
-      validateMessage = "Este campo precisa ser preenchido.";
-
-    } else if (streetAdress.length < 3) {
-      validateMessage = "O nome da Rua precisa ser maior que 2 caracteres.";
-
-    } else if (!regex.hasMatch(streetAdress)) {
       validateMessage = "Valor inválido.";
     }
 
@@ -125,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String _validateNumberAdress(String numberAdress) {
     Pattern numberAdressPattern = r'(^[0-9]*$)';
     RegExp regex = new RegExp(numberAdressPattern);
-    String validateMessage = null;
+    String validateMessage;
 
     if(!regex.hasMatch(numberAdress)) {
       validateMessage = "Valor inválido.";
@@ -133,8 +135,44 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return validateMessage;
   }
+
+  String _validateAdressField(String field) {
+    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]+$";
+    RegExp regex = new RegExp(textPattern);
+    String validateMessage;
+
+    if(field.length == 0) {
+      validateMessage = "Esse campo precisa ser preenchido.";
+
+    } else if(field.length < 3) {
+      validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
+
+    } else if(field.length > 30) {
+      validateMessage = "Esse campo precisa ser menor que 30 caracteres.";
+
+    } else if(!regex.hasMatch(field)) {
+      validateMessage = "Valor inválido.";
+
+    }
+
+    return validateMessage;
+  }
+
+  String _validateAdressComplement(String complement) {
+    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]*$";
+    RegExp regex = new RegExp(textPattern);
+    String validateMessage;
+
+    if(!regex.hasMatch(complement)) {
+      validateMessage = "Valor inválido.";
+    }
+
+    return validateMessage;
+  }
+
   void _validateInputs() {
     if(_formKey.currentState.validate()) {
+      _autoValidate = false;
       _formKey.currentState.save();
 
     } else {
@@ -166,7 +204,27 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
         backgroundColor: Color.fromRGBO(244, 244, 244, 5),
         appBar: AppBar(
-          title: Text("Cadastro"),
+          title: Text("Editar Perfil"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage())
+              );
+            },
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.check),
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage())
+                );
+              },
+            ),
+          ],
           backgroundColor: Color.fromRGBO(133, 102, 170, 4),
         ),
         body: SingleChildScrollView(
@@ -174,6 +232,23 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(url)
+                        )
+                    ),
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: RichText(
@@ -242,19 +317,36 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: DropdownButtonFormField(
+              value: _selectedGender,
+              hint: Text("", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),),
+              decoration: InputDecoration(labelText: "Gênero", labelStyle: TextStyle(color: Colors.black),),
               items: [
                 DropdownMenuItem<String>(
-                  child: Text("Feminino"),
+                    child: Text("Feminino"),
+                    value: "Feminino"
                 ),
                 DropdownMenuItem<String>(
-                  child: Text("Masculino"),
+                    child: Text("Masculino"),
+                    value: "Masculino"
                 )
               ],
-
-              onChanged: (valor) async {
-                value: valor;
+              onChanged: (value) async {
+                setState(() {
+                  _selectedGender = value;
+                });
               },
             )
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
+            controller: _dateController,
+            validator: _validateDate,
+            autofocus: true,
+            keyboardType: TextInputType.text,
+            style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
+            decoration: InputDecoration(labelText: "Data de nascimento*", labelStyle: TextStyle(color: Colors.black),),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -282,7 +374,7 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
             controller: _streetAdresstController,
-            validator: _validateStreetAdress,
+            validator: _validateAdressField,
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -302,7 +394,9 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: TextField(
+          child: TextFormField(
+            controller: _neighborhoodAdressController,
+            validator: _validateAdressField,
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -315,8 +409,10 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: TextField(
+          child: TextFormField(
             autofocus: true,
+            controller: _complementAdressController,
+            validator: _validateAdressComplement,
             keyboardType: TextInputType.text,
             style: TextStyle(
                 color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -328,7 +424,9 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: TextField(
+          child: TextFormField(
+            controller: _cityAdressController,
+            validator: _validateAdressField,
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -340,39 +438,21 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 12.0, bottom: 20),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4)),
-                  ),
-                  onPressed: _validateInputs,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    child: Text("CADASTRAR", textAlign: TextAlign.center, style: TextStyle(color: Colors.white,),),
-                  ),
-                ),
-              ),
-            ],
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
+            controller: _stateAdressController,
+            validator: _validateAdressField,
+            autofocus: true,
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+                color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
+            decoration: InputDecoration(
+              labelText: "Estado*",
+              labelStyle: TextStyle(color: Colors.black),
+            ),
           ),
         ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            text: 'Já tem cadastro? ',
-            style: TextStyle(color: Colors.black, fontSize: 15),
-            children: <TextSpan>[
-              TextSpan(text: 'Entre', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(133, 102, 170, 4),),
-                recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                ),
-              ),
-            ],
-          ),
-        ),
+
       ],
     );
   }
