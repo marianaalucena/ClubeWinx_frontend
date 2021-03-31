@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ResetSenha()),
+                    MaterialPageRoute(builder: (context) => ResetPasswordPage()),
                   );
                 },
               ),
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                   child: Text("ENTRAR", textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white),),),
-                color: Color.fromRGBO(105, 131, 170, 2),
+                color: Color.fromRGBO(133, 102, 170, 4),
                 elevation: 3.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(1.0),
@@ -181,10 +181,10 @@ class _LoginPageState extends State<LoginPage> {
       var response = LoginAPI.login(email, password);
 
       //falta implementar o if que dependera do response acima
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => HomePage()),
+      //   );
 
     } else {
       _autoValidate = true;
