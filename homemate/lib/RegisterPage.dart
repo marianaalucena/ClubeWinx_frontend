@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _cityAdressController = TextEditingController();
 
   String _validateName(String name) {
-    Pattern textPattern = r"^[a-zA-Z ,.'-]+$";
+    Pattern textPattern = r"^[A-zÀ-ú ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -134,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressField(String field) {
-    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]+$";
+    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressComplement(String complement) {
-    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]*$";
+    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]*$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -201,7 +201,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(255, 255, 255, 1))
+                backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
+                elevation: MaterialStateProperty.all(0.0)
               ),
               onPressed: (){
                 Navigator.of(context).pop();
@@ -239,7 +240,8 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(255, 255, 255, 1))
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
+                  elevation: MaterialStateProperty.all(0.0)
                 ),
                 onPressed: (){
                   Navigator.of(context).pop();
@@ -269,8 +271,6 @@ class _RegisterPageState extends State<RegisterPage> {
     _cityAdressController.dispose();
     super.dispose();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
