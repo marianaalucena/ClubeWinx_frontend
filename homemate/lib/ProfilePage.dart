@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/EditProfilePage.dart';
+import 'package:homemate/HomePage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -8,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
-  final Color green = Color(0xFF1E8161);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +19,22 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text("Perfil"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          onPressed: (){},
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage())
+            );
+          },
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit_outlined),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage())
+              );
+            },
           ),
         ],
         backgroundColor: Color.fromRGBO(133, 102, 170, 4),
