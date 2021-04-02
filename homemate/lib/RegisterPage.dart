@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateDate(String date) {
-    Pattern datePattern = r"^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4}$";
+    Pattern datePattern = r"^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4})$";
     RegExp regex = new RegExp(datePattern);
     String validateMessage;
 
@@ -100,9 +100,9 @@ class _RegisterPageState extends State<RegisterPage> {
   String _validatePhoneNumber(String phoneNumber) {
     Pattern phoneNumberPattern = r'(^(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})$)';
     RegExp regex = new RegExp(phoneNumberPattern);
-    String validateMessage = null;
+    String validateMessage;
 
-    if(!regex.hasMatch(phoneNumber) && phoneNumber.length > 0){
+    if(!regex.hasMatch(phoneNumber)){
       validateMessage = "Valor inválido.";
     }
 
@@ -344,8 +344,7 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "Email*", labelStyle: TextStyle(color: Colors.black),
-            ),
+            decoration: InputDecoration(labelText: "Email*", labelStyle: TextStyle(color: Colors.black),),
           ),
         ),
         Padding(
@@ -391,7 +390,10 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "Data de nascimento*", labelStyle: TextStyle(color: Colors.black),),
+            decoration: InputDecoration(labelText: "Data de nascimento*", labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Ex: 16/11/1992',
+              hintStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 13)
+            ),
           ),
         ),
         Padding(
@@ -413,7 +415,10 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.numberWithOptions(signed:true),
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "CEP",labelStyle: TextStyle(color: Colors.black),),
+            decoration: InputDecoration(labelText: "CEP",labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Ex: 58429-120',
+              hintStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 13)
+            ),
           ),
         ),
         Padding(
