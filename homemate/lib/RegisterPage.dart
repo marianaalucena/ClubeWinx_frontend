@@ -13,6 +13,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _formKey = GlobalKey<FormState>();      //cria uma chave global que identifica unicamente o Form
   bool _autoValidate = false;
+  bool _isRegistrerFieldsValidated = false;
   var _selectedGender;
 
   TextEditingController _nameController = TextEditingController();
@@ -122,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateNumberAdress(String numberAdress) {
-    Pattern numberAdressPattern = r'(^[0-9]*$)';
+    Pattern numberAdressPattern = r"^[0-9]+$";
     RegExp regex = new RegExp(numberAdressPattern);
     String validateMessage;
 
@@ -134,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressField(String field) {
-    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]+$";
+    Pattern textPattern = r"^[A-zÀ-ú ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -169,53 +170,60 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _validateInputs() {
     if(_formKey.currentState.validate()) {
-      _autoValidate = false;
+      _isRegistrerFieldsValidated = true;
       _formKey.currentState.save();
 
     } else {
-      _autoValidate = true;
+      setState(() {
+        _autoValidate = true;
+      });
     }
   }
 
-  void _showRegisterConfirmation() async {
-    if (_autoValidate == false) {
-      return showDialog(
-          context: context,
-          builder: (param) {
-            return AlertDialog(
-              title: Text("Confirmação do Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
-              content: SingleChildScrollView(
-                child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),
-              ),
-              actions: <Widget>[
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))
-                  ),
-                  onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage())
-                    );
-                  },
-                  child: Text("Confirmar"),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
-                      elevation: MaterialStateProperty.all(0.0)
-                  ),
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Cancelar", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),
-                ),
-              ],
-              backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-            );
-          }
-      );
+  void _showConfirmationMessages() {
+    if(_isRegistrerFieldsValidated) {
+      _showRegisterConfirmation();
     }
+  }
+
+  Future<Widget> _showRegisterConfirmation() async {
+    return showDialog(
+      context: context,
+      builder: (param) {
+        return AlertDialog(
+          title: Text("Confirmação do Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
+          content: SingleChildScrollView(
+            child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))),
+                onPressed: (){
+                  _showSnackBarConfirmation();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                child: Text("Confirmar"),),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
+                  elevation: MaterialStateProperty.all(0.0)),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                child: Text("Cancelar", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),),
+            ],
+            backgroundColor: Color.fromRGBO(244, 244, 244, 5),
+          );
+        }
+    );
+  }
+
+  void _showSnackBarConfirmation() {
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("Cadastro realizado com sucesso.")));
   }
 
   void _showRegisterQuitMessage() async {
@@ -314,6 +322,7 @@ class _RegisterPageState extends State<RegisterPage> {
             // )
             Form(
               key: _formKey,
+              autovalidate: _autoValidate,
               child: FormUI()
             ),
           ],
@@ -386,7 +395,7 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
             controller: _dateController,
-            validator: _validateDate,
+            //validator: _validateDate,
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -514,10 +523,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   onPressed: () {
                     _validateInputs();
-                    _showRegisterConfirmation();
-                    ScaffoldMessenger.of(context)
-                      ..removeCurrentSnackBar()
-                      ..showSnackBar(SnackBar(content: Text("Cadastro realizado com sucesso.")));
+                    _showConfirmationMessages();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
