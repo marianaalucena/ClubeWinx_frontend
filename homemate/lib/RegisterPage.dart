@@ -30,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _cityAdressController = TextEditingController();
 
   String _validateName(String name) {
-    Pattern textPattern = r"^[A-zÀ-ú ,.'-]+$";
+    Pattern textPattern = r"^[A-zÀ-ú ,.'-]*$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -40,8 +40,8 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if(name.length < 3) {
       validateMessage = "Este campo precisa ser maior que 2 caracteres.";
 
-    } else if(name.length > 30) {
-      validateMessage = "Este campo precisa ser menor que 30 caracteres.";
+    } else if(name.length > 40) {
+      validateMessage = "Este campo precisa ser menor que 40 caracteres.";
 
     } else if(!regex.hasMatch(name)) {
       validateMessage = "Valor inválido.";
@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateDate(String date) {
-    Pattern datePattern = r"^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4})$";
+    Pattern datePattern = r"^(\d{2})/(\d{2})/(\d{4})$";
     RegExp regex = new RegExp(datePattern);
     String validateMessage;
 
@@ -73,9 +73,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if(email.length == 0) {
       validateMessage = "Esse campo precisa ser preenchido.";
-
-    } else if(email.length < 3) {
-      validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
 
     } else if(!regex.hasMatch(email)) {
       validateMessage = "Valor inválido.";
@@ -104,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
     RegExp regex = new RegExp(phoneNumberPattern);
     String validateMessage;
 
-    if(!regex.hasMatch(phoneNumber)){
+    if(phoneNumber.length > 0 && !regex.hasMatch(phoneNumber)){
       validateMessage = "Valor inválido.";
     }
 
@@ -112,11 +109,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateCep(String cep) {
-    Pattern cepPattern = r'(^(\d{5})[-](\d{3})$)?';
+    Pattern cepPattern = r'^(\d{5})[-](\d{3})$';
     RegExp regex = new RegExp(cepPattern);
     String validateMessage;
 
-    if(!regex.hasMatch(cep)) {
+    if(cep.length > 0 && !regex.hasMatch(cep)) {
       validateMessage = "Valor inválido.";
     }
 
@@ -124,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateNumberAdress(String numberAdress) {
-    Pattern numberAdressPattern = r"^[0-9]+$";
+    Pattern numberAdressPattern = r"^[0-9]*$";
     RegExp regex = new RegExp(numberAdressPattern);
     String validateMessage;
 
@@ -136,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressField(String field) {
-    Pattern textPattern = r"^[A-zÀ-ú ,.'-]+$";
+    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -146,8 +143,8 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if(field.length < 3) {
       validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
 
-    } else if(field.length > 30) {
-      validateMessage = "Esse campo precisa ser menor que 30 caracteres.";
+    } else if(field.length > 40) {
+      validateMessage = "Esse campo precisa ser menor que 40 caracteres.";
 
     } else if(!regex.hasMatch(field)) {
       validateMessage = "Valor inválido.";
@@ -181,44 +178,44 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  void _showConfirmationMessages() {
+  void _showDialogConfirmation() async {
     if(_isRegistrerFieldsValidated) {
-      _showRegisterConfirmation();
-    }
-  }
-
-  Future<Widget> _showRegisterConfirmation() async {
-    return showDialog(
-      context: context,
-      builder: (param) {
-        return AlertDialog(
-          title: Text("Confirmação do Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
-          content: SingleChildScrollView(
-            child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),),
-            actions: <Widget>[
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))),
-                onPressed: (){
-                  _showSnackBarConfirmation();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+      return showDialog(
+        context: context,
+        builder: (param) {
+          return AlertDialog(
+            title: Text("Confirmação do Cadastro",
+              style: TextStyle(color: Colors.black, fontSize: 15,),),
+              content: SingleChildScrollView(
+                child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),),
+              actions: <Widget>[
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))),
+                  onPressed: () {
+                    _showSnackBarConfirmation();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                   },
-                child: Text("Confirmar"),),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
-                  elevation: MaterialStateProperty.all(0.0)),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-                child: Text("Cancelar", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),),
-            ],
-            backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-          );
-        }
-    );
+                  child: Text("Confirmar"),),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromRGBO(244, 244, 244, 0)),
+                      elevation: MaterialStateProperty.all(0.0)),
+                  onPressed: () {
+                    _isRegistrerFieldsValidated = false;
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cancelar", style: TextStyle(
+                    color: Color.fromRGBO(133, 102, 170, 4))),),
+              ],
+              backgroundColor: Color.fromRGBO(244, 244, 244, 5),
+            );
+          }
+      );
+    }
   }
 
   void _showSnackBarConfirmation() {
@@ -317,10 +314,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            // CircleAvatar(
-            //   radius: 100,
-            //   backgroundImage: NetworkImage(""),
-            // )
             Form(
               key: _formKey,
               autovalidate: _autoValidate,
@@ -396,7 +389,7 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
             controller: _dateController,
-            //validator: _validateDate,
+            validator: _validateDate,
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -524,7 +517,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   onPressed: () {
                     _validateInputs();
-                    _showConfirmationMessages();
+                    _showDialogConfirmation();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15.0),
