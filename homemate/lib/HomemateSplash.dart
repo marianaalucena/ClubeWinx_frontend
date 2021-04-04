@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:homemate/EditProfilePage.dart';
 
 import 'LoginPage.dart';
 
@@ -16,7 +17,7 @@ class _SplashState extends State<HomemateSplash> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 1)).then((_){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EditProfilePage()));
     });
   }
 
