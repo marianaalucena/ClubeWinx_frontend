@@ -67,39 +67,39 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Form(
                 key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        controller: _emailController,
-                        validator: _validateEmail,
-                        autofocus: true,
-                        keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(
-                            color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                        decoration: InputDecoration(
-                          labelText: "Email",
-                          labelStyle: TextStyle(color: Colors.black),
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _emailController,
+                      validator: _validateEmail,
+                      autofocus: true,
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(
+                          color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        labelStyle: TextStyle(color: Colors.black),
 
-                        ),
                       ),
+                    ),
 
-                      SizedBox(
-                        height: 10,
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      controller: _passwordController,
+                      autofocus: true,
+                      obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
+                      style: TextStyle(
+                          color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
+                      decoration: InputDecoration(
+                        labelText: "Senha",
+                        labelStyle: TextStyle(color: Colors.black),
                       ),
-                      TextField(
-                        controller: _passwordController,
-                        autofocus: true,
-                        obscureText: true,
-                        keyboardType: TextInputType.visiblePassword,
-                        style: TextStyle(
-                            color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                        decoration: InputDecoration(
-                          labelText: "Senha",
-                          labelStyle: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ),
 
               TextButton(
@@ -139,8 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.black, fontSize: 15),
                   children: <TextSpan>[
                     TextSpan(text: 'Cadastre-se',
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(133, 102, 170, 4)),
+                      style: TextStyle(fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(133, 102, 170, 4)),
                       recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => RegisterPage()),

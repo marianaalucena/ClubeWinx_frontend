@@ -1,20 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/ProfilePage.dart';
 
-import 'LoginPage.dart';
 
 
-class RegisterPage extends StatefulWidget {
+
+class EditProfilePage extends StatefulWidget {
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _EditProfilePageState extends State<EditProfilePage> {
 
   final _formKey = GlobalKey<FormState>();      //cria uma chave global que identifica unicamente o Form
   bool _autoValidate = false;
-  bool _isRegistrerFieldsValidated = false;
   var _selectedGender;
+  final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
 
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -29,8 +30,9 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _stateAdressController = TextEditingController();
   TextEditingController _cityAdressController = TextEditingController();
 
+
   String _validateName(String name) {
-    Pattern textPattern = r"^[A-zÀ-ú ,.'-]*$";
+    Pattern textPattern = r"^[a-zA-Z ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -40,8 +42,8 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if(name.length < 3) {
       validateMessage = "Este campo precisa ser maior que 2 caracteres.";
 
-    } else if(name.length > 40) {
-      validateMessage = "Este campo precisa ser menor que 40 caracteres.";
+    } else if(name.length > 30) {
+      validateMessage = "Este campo precisa ser menor que 30 caracteres.";
 
     } else if(!regex.hasMatch(name)) {
       validateMessage = "Valor inválido.";
@@ -52,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateDate(String date) {
-    Pattern datePattern = r"^(\d{2})/(\d{2})/(\d{4})$";
+    Pattern datePattern = r"^(0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4}$";
     RegExp regex = new RegExp(datePattern);
     String validateMessage;
 
@@ -74,6 +76,9 @@ class _RegisterPageState extends State<RegisterPage> {
     if(email.length == 0) {
       validateMessage = "Esse campo precisa ser preenchido.";
 
+    } else if(email.length < 3) {
+      validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
+
     } else if(!regex.hasMatch(email)) {
       validateMessage = "Valor inválido.";
 
@@ -90,18 +95,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
     } else if(password.length < 8) {
       validateMessage = "Esse campo precisa ter pelo menos 8 caracteres.";
-   }
+    }
 
-   return validateMessage;
-
+    return validateMessage;
   }
 
   String _validatePhoneNumber(String phoneNumber) {
     Pattern phoneNumberPattern = r'(^(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})$)';
     RegExp regex = new RegExp(phoneNumberPattern);
-    String validateMessage;
+    String validateMessage = null;
 
-    if(phoneNumber.length > 0 && !regex.hasMatch(phoneNumber)){
+    if(!regex.hasMatch(phoneNumber) && phoneNumber.length > 0){
       validateMessage = "Valor inválido.";
     }
 
@@ -109,11 +113,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateCep(String cep) {
-    Pattern cepPattern = r'^(\d{5})[-](\d{3})$';
+    Pattern cepPattern = r'(^(\d{5})[-](\d{3})$)?';
     RegExp regex = new RegExp(cepPattern);
     String validateMessage;
 
-    if(cep.length > 0 && !regex.hasMatch(cep)) {
+    if(!regex.hasMatch(cep)) {
       validateMessage = "Valor inválido.";
     }
 
@@ -121,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateNumberAdress(String numberAdress) {
-    Pattern numberAdressPattern = r"^[0-9]*$";
+    Pattern numberAdressPattern = r'(^[0-9]*$)';
     RegExp regex = new RegExp(numberAdressPattern);
     String validateMessage;
 
@@ -133,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressField(String field) {
-    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]+$";
+    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]+$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -143,8 +147,8 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if(field.length < 3) {
       validateMessage = "Esse campo precisa ser maior que 2 caracteres.";
 
-    } else if(field.length > 40) {
-      validateMessage = "Esse campo precisa ser menor que 40 caracteres.";
+    } else if(field.length > 30) {
+      validateMessage = "Esse campo precisa ser menor que 30 caracteres.";
 
     } else if(!regex.hasMatch(field)) {
       validateMessage = "Valor inválido.";
@@ -155,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validateAdressComplement(String complement) {
-    Pattern textPattern = r"^[A-zÀ-ú0-9 ,.'-]*$";
+    Pattern textPattern = r"^[a-zA-Z0-9 ,.'-]*$";
     RegExp regex = new RegExp(textPattern);
     String validateMessage;
 
@@ -168,99 +172,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _validateInputs() {
     if(_formKey.currentState.validate()) {
-      _isRegistrerFieldsValidated = true;
+      _autoValidate = false;
       _formKey.currentState.save();
 
     } else {
-      setState(() {
-        _autoValidate = true;
-      });
+      _autoValidate = true;
     }
-  }
-
-  void _showDialogConfirmation() async {
-    if(_isRegistrerFieldsValidated) {
-      return showDialog(
-        context: context,
-        builder: (param) {
-          return AlertDialog(
-            title: Text("Confirmação do Cadastro",
-              style: TextStyle(color: Colors.black, fontSize: 15,),),
-              content: SingleChildScrollView(
-                child: Text("Deseja confirmar o cadastro?", style: TextStyle(color: Colors.black, fontSize: 15,)),),
-              actions: <Widget>[
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))),
-                  onPressed: () {
-                    _showSnackBarConfirmation();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  child: Text("Confirmar"),),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromRGBO(244, 244, 244, 0)),
-                      elevation: MaterialStateProperty.all(0.0)),
-                  onPressed: () {
-                    _isRegistrerFieldsValidated = false;
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Cancelar", style: TextStyle(
-                    color: Color.fromRGBO(133, 102, 170, 4))),),
-              ],
-              backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-            );
-          }
-      );
-    }
-  }
-
-  void _showSnackBarConfirmation() {
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text("Cadastro realizado com sucesso.")));
-  }
-
-  void _showRegisterQuitMessage() async {
-    return showDialog(
-        context: context,
-        builder: (param) {
-          return AlertDialog(
-            title: Text("Cadastro", style: TextStyle(color: Colors.black, fontSize: 15,),),
-            content: SingleChildScrollView(
-              child: Text("Deseja sair da tela de cadastramento?", style: TextStyle(color: Colors.black, fontSize: 15,)),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))
-                ),
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage())
-                  );
-                },
-                child: Text("Sim"),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(244, 244, 244, 0)),
-                  elevation: MaterialStateProperty.all(0.0)
-                ),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-                child: Text("Não", style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),
-              ),
-            ],
-            backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-          );
-        }
-    );
   }
 
   @override
@@ -280,48 +197,82 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-      appBar: AppBar(
-        title: Text("Cadastro"),
-        leading: ElevatedButton(
-          onPressed: _showRegisterQuitMessage,
-          child: Icon(Icons.arrow_back),
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Color.fromRGBO(133, 102, 170, 4)),
-            elevation: MaterialStateProperty.all(0.0)
+        backgroundColor: Color.fromRGBO(244, 244, 244, 5),
+        appBar: AppBar(
+          title: Text("Editar Perfil"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage())
+              );
+            },
           ),
-        ),
-        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Home',
-                  style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4), fontSize: 30, fontWeight: FontWeight.bold),
-                  children: <TextSpan>[
-                    TextSpan(text: 'mate', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(142, 198, 197, 4),)),
-                  ],
-                ),
-              ),
-            ),
-            Form(
-              key: _formKey,
-              autovalidate: _autoValidate,
-              child: FormUI()
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.check),
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage())
+                );
+              },
             ),
           ],
+          backgroundColor: Color.fromRGBO(133, 102, 170, 4),
         ),
-      )
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(30.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(url)
+                        )
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'Home',
+                    style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4), fontSize: 30, fontWeight: FontWeight.bold),
+                    children: <TextSpan>[
+                      TextSpan(text: 'mate', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(142, 198, 197, 4),)),
+                    ],
+                  ),
+                ),
+              ),
+              // CircleAvatar(
+              //   radius: 100,
+              //   backgroundImage: NetworkImage(""),
+              // )
+              Form(
+                  key: _formKey,
+                  child: FormUI()
+              ),
+            ],
+          ),
+        )
     );
   }
 
@@ -347,7 +298,8 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "Email*", labelStyle: TextStyle(color: Colors.black),),
+            decoration: InputDecoration(labelText: "Email*", labelStyle: TextStyle(color: Colors.black),
+            ),
           ),
         ),
         Padding(
@@ -363,27 +315,27 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: DropdownButtonFormField(
-            value: _selectedGender,
-            hint: Text("", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),),
-            decoration: InputDecoration(labelText: "Gênero", labelStyle: TextStyle(color: Colors.black),),
-            items: [
-              DropdownMenuItem<String>(
-                child: Text("Feminino"),
-                value: "Feminino"
-              ),
-              DropdownMenuItem<String>(
-                child: Text("Masculino"),
-                value: "Masculino"
-              )
-            ],
-            onChanged: (value) async {
-             setState(() {
-               _selectedGender = value;
-             });
-            },
-          )
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: DropdownButtonFormField(
+              value: _selectedGender,
+              hint: Text("", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),),
+              decoration: InputDecoration(labelText: "Gênero", labelStyle: TextStyle(color: Colors.black),),
+              items: [
+                DropdownMenuItem<String>(
+                    child: Text("Feminino"),
+                    value: "Feminino"
+                ),
+                DropdownMenuItem<String>(
+                    child: Text("Masculino"),
+                    value: "Masculino"
+                )
+              ],
+              onChanged: (value) async {
+                setState(() {
+                  _selectedGender = value;
+                });
+              },
+            )
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -393,10 +345,7 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "Data de nascimento*", labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Ex: 16/11/1992',
-              hintStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 13)
-            ),
+            decoration: InputDecoration(labelText: "Data de nascimento*", labelStyle: TextStyle(color: Colors.black),),
           ),
         ),
         Padding(
@@ -418,10 +367,7 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.numberWithOptions(signed:true),
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "CEP",labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Ex: 58429-120',
-              hintStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 13)
-            ),
+            decoration: InputDecoration(labelText: "CEP",labelStyle: TextStyle(color: Colors.black),),
           ),
         ),
         Padding(
@@ -506,43 +452,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 12.0, bottom: 20),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4)),
-                  ),
-                  onPressed: () {
-                    _validateInputs();
-                    _showDialogConfirmation();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                    child: Text("CADASTRAR", textAlign: TextAlign.center, style: TextStyle(color: Colors.white,),),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            text: 'Já tem cadastro? ',
-            style: TextStyle(color: Colors.black, fontSize: 15),
-            children: <TextSpan>[
-              TextSpan(text: 'Entre', style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromRGBO(133, 102, 170, 4),),
-                recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                ),
-              ),
-            ],
-          ),
-        ),
+
       ],
     );
   }
