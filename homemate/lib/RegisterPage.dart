@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'UserAPI.dart';
 import 'LoginPage.dart';
+import 'model/User.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -10,24 +11,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final _formKey = GlobalKey<FormState>();      //cria uma chave global que identifica unicamente o Form
-  bool _autoValidate = false;
+  Future<User> _futureUser;
+  Map<String, String> _userInformation = {};
   bool _isRegistrerFieldsValidated = false;
-  var _selectedGender;
-
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
-  TextEditingController _cepController = TextEditingController();
-  TextEditingController _streetAdresstController = TextEditingController();
-  TextEditingController _numberAdressController = TextEditingController();
-  TextEditingController _neighborhoodAdressController = TextEditingController();
-  TextEditingController _complementAdressController = TextEditingController();
-  TextEditingController _stateAdressController = TextEditingController();
-  TextEditingController _cityAdressController = TextEditingController();
+  bool _autoValidate = false;
+  UserAPI api = UserAPI();
 
   String _validateName(String name) {
     Pattern textPattern = r"^[A-zÀ-ú ,.'-]*$";
@@ -168,8 +157,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void _validateInputs() {
     if(_formKey.currentState.validate()) {
-      _isRegistrerFieldsValidated = true;
       _formKey.currentState.save();
+      _isRegistrerFieldsValidated = true;
 
     } else {
       setState(() {
@@ -194,9 +183,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(133, 102, 170, 4))),
                   onPressed: () {
                     _showSnackBarConfirmation();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                    setState(() {
+                      _futureUser = api.createUser(_userInformation);
+                    });
                   },
                   child: Text("Confirmar"),),
                 ElevatedButton(
@@ -264,23 +254,6 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
-  void dispose() {
-    //Clean up the controller when the widget is removed from the tree
-    _nameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _phoneNumberController.dispose();
-    _cepController.dispose();
-    _streetAdresstController.dispose();
-    _numberAdressController.dispose();
-    _neighborhoodAdressController.dispose();
-    _complementAdressController.dispose();
-    _stateAdressController.dispose();
-    _cityAdressController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(244, 244, 244, 5),
@@ -316,7 +289,6 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Form(
               key: _formKey,
-              autovalidate: _autoValidate,
               child: FormUI()
             ),
           ],
@@ -331,8 +303,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _nameController,
             validator: _validateName,
+            onSaved: (value) {
+              _userInformation['name'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -342,8 +316,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _emailController,
             validator: _validateEmail,
+            onSaved: (value) {
+              _userInformation['email'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -353,8 +329,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _passwordController,
             validator: _validatePassword,
+            onSaved: (value) {
+              _userInformation['password'] = value;
+            },
             autofocus: true,
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
@@ -365,7 +343,6 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: DropdownButtonFormField(
-            value: _selectedGender,
             hint: Text("", style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),),
             decoration: InputDecoration(labelText: "Gênero", labelStyle: TextStyle(color: Colors.black),),
             items: [
@@ -379,17 +356,19 @@ class _RegisterPageState extends State<RegisterPage> {
               )
             ],
             onChanged: (value) async {
-             setState(() {
-               _selectedGender = value;
-             });
+              setState(() {
+                _userInformation['gender'] = value;
+              });
             },
           )
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _dateController,
             validator: _validateDate,
+            onSaved: (value) {
+              _userInformation['birthDate'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -402,8 +381,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _phoneNumberController,
             validator: _validatePhoneNumber,
+            onSaved: (value) {
+              _userInformation['phoneNumber'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.phone,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -413,8 +394,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _cepController,
             validator: _validateCep,
+            onSaved: (value) {
+              _userInformation['cep'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.numberWithOptions(signed:true),
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -427,8 +410,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _streetAdresstController,
             validator: _validateAdressField,
+            onSaved: (value) {
+              _userInformation['street'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -438,8 +423,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _numberAdressController,
             validator: _validateNumberAdress,
+            onSaved: (value) {
+              _userInformation['number'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.number,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -449,8 +436,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _neighborhoodAdressController,
             validator: _validateAdressField,
+            onSaved: (value) {
+              _userInformation['neighborhood'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -465,8 +454,10 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
             autofocus: true,
-            controller: _complementAdressController,
             validator: _validateAdressComplement,
+            onSaved: (value) {
+              _userInformation['complement'] = value;
+            },
             keyboardType: TextInputType.text,
             style: TextStyle(
                 color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
@@ -479,8 +470,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _cityAdressController,
             validator: _validateAdressField,
+            onSaved: (value) {
+              _userInformation['city'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(
@@ -494,8 +487,10 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            controller: _stateAdressController,
             validator: _validateAdressField,
+            onSaved: (value) {
+              _userInformation['state'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(
