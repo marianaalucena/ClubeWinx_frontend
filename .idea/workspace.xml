@@ -32,21 +32,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b6f91a2-4ab7-417f-9183-f84d405076b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ClubeWinx_frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ClubeWinx_frontend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/HomemateSplash.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/HomemateSplash.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/lib/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/HomePage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/NewPasswordPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/NewPasswordPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/RegisterPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/RegisterPage.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RX8N60BBF9B]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
