@@ -1,15 +1,52 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/EditProfilePage.dart';
 import 'package:homemate/HomePage.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'Profile_helper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
+  final Profile profile;
+
+  ProfilePage({this.profile});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
+
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+
+  final _nameFocus = FocusNode();
+
+  bool _userEdited = false;
+
+  Profile _editedProfile;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if(widget.profile == null){
+      _editedProfile = Profile();
+    } else {
+      _editedProfile = Profile.fromMap(widget.profile.toMap());
+
+      _nameController.text = _editedProfile.name;
+      _emailController.text = _editedProfile.email;
+      _phoneController.text = _editedProfile.phone;
+    }
+  }
   final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,20 +96,32 @@ class _ProfilePageState extends State<ProfilePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-
-                      Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
+                      GestureDetector(
+                        child: Container(
+                          width: 140.0,
+                          height: 140.0,
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(url)
-                            )
+                                image: _editedProfile.img != null ?
+                                FileImage(File(_editedProfile.img)) :
+                                AssetImage("images/person.png"),
+                                fit: BoxFit.cover
+                            ),
+                          ),
                         ),
+                        onTap: (){
+                          ImagePicker.pickImage(source: ImageSource.camera).then((file){
+                            if(file == null) return;
+                            setState(() {
+                              _editedProfile.img = file.path;
+                            });
+                          });
+                        },
                       ),
-                    ],
-                  ),
+                  ]),
+
+
                   Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 32),
                     child: Text('Clube Winx',

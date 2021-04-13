@@ -32,14 +32,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b6f91a2-4ab7-417f-9183-f84d405076b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ClubeWinx_frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ClubeWinx_frontend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/homemate/lib/ListProfilesPage.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homemate/lib/Profile_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/HomemateSplash.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/HomemateSplash.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/NewPasswordPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/NewPasswordPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/RegisterPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/RegisterPage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +63,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Pedrinho Som\Documents\ClubeWinx_frontend\homemate\lib" />
+    </key>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
@@ -142,29 +147,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617154278958" />
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1617166624901">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1618347020528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1306" height="167" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007561" />
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617166624901" />
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
     <state width="486" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1617166624901">
+    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1618347020528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1306" height="167" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007559" />
-    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617166624901" />
+    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
     <state width="486" height="258" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1617166624901">
+    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1618347020528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1306" height="167" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007559" />
-    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617166624901" />
+    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
     <state width="486" height="258" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1617166624901">
+    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1618347020528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1306" height="167" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007560" />
-    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617166624901" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
     <state width="486" height="258" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
     <state x="259" y="13" key="SettingsEditor" timestamp="1617156649696">
       <screen x="0" y="0" width="1920" height="1040" />
