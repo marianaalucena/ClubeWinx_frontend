@@ -17,7 +17,7 @@ class _SplashState extends State<HomemateSplash> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 1)).then((_){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EditProfilePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
     });
   }
 
