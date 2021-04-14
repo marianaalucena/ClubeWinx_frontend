@@ -181,10 +181,10 @@ class _LoginPageState extends State<LoginPage> {
       var response = LoginAPI.login(email, password);
 
       //falta implementar o if que dependera do response acima
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => HomePage()),
-      //   );
+         Navigator.push(
+           context,
+           MaterialPageRoute(builder: (context) => HomePage()),
+         );
 
     } else {
       _autoValidate = true;

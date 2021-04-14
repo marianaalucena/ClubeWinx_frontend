@@ -32,6 +32,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b6f91a2-4ab7-417f-9183-f84d405076b7" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/homemate/lib/ListProfilesPage.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/homemate/lib/Profile_helper.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
@@ -40,13 +41,20 @@
       <change beforePath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homemate/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homemate/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.yaml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/homemate/lib/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/HomePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" afterDir="false" />
+>>>>>>> de3650268fdc73ffb89b64939462e04e1e07f3bf
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+=======
+>>>>>>> de3650268fdc73ffb89b64939462e04e1e07f3bf
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
