@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:homemate/HomePage.dart';
+
 import 'Profile_helper.dart';
 import 'ProfilePage.dart';
 import 'package:flutter/material.dart';
@@ -29,23 +31,16 @@ class _ListProfilePageState extends State<ListProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
-        backgroundColor: Colors.red,
-        centerTitle: true,
+        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
+        title: Text("Minhas Conexões"),
         actions: <Widget>[
-          PopupMenuButton<OrderOptions>(
-            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
-              const PopupMenuItem<OrderOptions>(
-                child: Text("Ordenar de A-Z"),
-                value: OrderOptions.orderaz,
-              ),
-              const PopupMenuItem<OrderOptions>(
-                child: Text("Ordenar de Z-A"),
-                value: OrderOptions.orderza,
-              ),
-            ],
-            onSelected: _orderList,
-          )
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
+          ),
         ],
       ),
       backgroundColor: Colors.white,

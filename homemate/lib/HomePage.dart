@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/mariana.a.lucena/Documents/Flutter/homemate/ClubeWinx_frontend/ClubeWinx_frontend/homemate/lib/announcement/MyAnnouncementPage.dart';
+import 'package:homemate/ListProfilesPage.dart';
+import 'announcement/MyAnnouncementPage.dart';
 
 import 'announcement/NewAnnouncementPage.dart';
 import 'ProfilePage.dart';
@@ -42,7 +43,10 @@ class _HomePageState extends State<HomePage> {
           switch (index){
             case 0:  Navigator.of(context).pushNamed('/medical centre');
             break;
-            case 1:  Navigator.of(context).pushNamed('/medical centre');
+            case 1:  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ListProfilePage())
+            );
             break;
             case 2:  Navigator.push(
               context,

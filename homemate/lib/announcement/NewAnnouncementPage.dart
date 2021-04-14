@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/mariana.a.lucena/Documents/Flutter/homemate/ClubeWinx_frontend/ClubeWinx_frontend/homemate/lib/announcement/AnnouncementAPI.dart';
+import 'AnnouncementAPI.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../HomePage.dart';
