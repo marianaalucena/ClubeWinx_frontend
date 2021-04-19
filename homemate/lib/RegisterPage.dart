@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String _validatePhoneNumber(String phoneNumber) {
-    Pattern phoneNumberPattern = r'(^(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})$)';
+    Pattern phoneNumberPattern = r'(^(\d{3}|\d{2}|\d{0})(\d{5})(\d{4})$)';
     RegExp regex = new RegExp(phoneNumberPattern);
     String validateMessage;
 
@@ -97,12 +97,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return validateMessage;
   }
 
-  String _validateCep(String cep) {
-    Pattern cepPattern = r'^(\d{5})[-](\d{3})$';
-    RegExp regex = new RegExp(cepPattern);
+  String _validateZipCode(String zipCode) {
+    Pattern zipCodePattern = r'^(\d{5})[-](\d{3})$';
+    RegExp regex = new RegExp(zipCodePattern);
     String validateMessage;
 
-    if(cep.length > 0 && !regex.hasMatch(cep)) {
+    if(zipCode.length > 0 && !regex.hasMatch(zipCode)) {
       validateMessage = "Valor inválido.";
     }
 
@@ -316,6 +316,19 @@ class _RegisterPageState extends State<RegisterPage> {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
+            validator: _validateName,
+            onSaved: (value) {
+              _userInformation['lastName'] = value;
+            },
+            autofocus: true,
+            keyboardType: TextInputType.text,
+            style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
+            decoration: InputDecoration(labelText: "Sobrenome*", labelStyle: TextStyle(color: Colors.black),),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
             validator: _validateEmail,
             onSaved: (value) {
               _userInformation['email'] = value;
@@ -388,15 +401,18 @@ class _RegisterPageState extends State<RegisterPage> {
             autofocus: true,
             keyboardType: TextInputType.phone,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-            decoration: InputDecoration(labelText: "Telefone", labelStyle: TextStyle(color: Colors.black),),
+            decoration: InputDecoration(labelText: "Telefone", labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Apenas números.',
+              hintStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 13)
+            ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: TextFormField(
-            validator: _validateCep,
+            validator: _validateZipCode,
             onSaved: (value) {
-              _userInformation['cep'] = value;
+              _userInformation['zipCode'] = value;
             },
             autofocus: true,
             keyboardType: TextInputType.numberWithOptions(signed:true),
@@ -438,7 +454,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: TextFormField(
             validator: _validateAdressField,
             onSaved: (value) {
-              _userInformation['neighborhood'] = value;
+              _userInformation['district'] = value;
             },
             autofocus: true,
             keyboardType: TextInputType.text,
