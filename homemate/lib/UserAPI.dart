@@ -5,30 +5,34 @@ import 'dart:convert';
 class UserAPI {
   Future<User> createUser(Map<String, String> form) async {
     final response = await http.post(
-        Uri.https('https://example.com/whatsit/create', 'users'),
+        Uri.http('192.168.0.104:3000', '/user'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: json.encode(<String, String>{
           'name': form['name'],
+          'lastname': form['lastName'],
           'email': form['email'],
           'password': form['password'],
           'gender': form['gender'],
-          'birthDate': form['birthDate'],
+          'birthday': form['birthDate'],
           'phoneNumber': form['phoneNumber'],
-          'cep': form['cep'],
+          'zipCode': form['zipCode'],
           'street': form['street'],
           'number': form['number'],
-          'neighborhood': form['neighborhood'],
+          'district': form['district'],
           'complement': form['complement'],
           'city': form['city'],
           'state': form['state']
         })
     );
-    if(response.statusCode == 201) {
-      return User.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to create User');
-    }
+    print('aaaaaaaa' + response.statusCode.toString());
+
+    // if(response.statusCode == 201) {
+    //   print(response.body);
+    //   //return User.fromJson(json.decode(response.body));
+    // } else {
+    //   throw Exception('Failed to create User');
+    // }
   }
 }

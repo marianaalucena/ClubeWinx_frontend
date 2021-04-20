@@ -186,6 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                     setState(() {
                       _futureUser = api.createUser(_userInformation);
+                      print('aloooooooooooo');
                     });
                   },
                   child: Text("Confirmar"),),
