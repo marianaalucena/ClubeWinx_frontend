@@ -26,13 +26,11 @@ class UserAPI {
           'state': form['state']
         })
     );
-    print('aaaaaaaa' + response.statusCode.toString());
 
-    // if(response.statusCode == 201) {
-    //   print(response.body);
-    //   //return User.fromJson(json.decode(response.body));
-    // } else {
-    //   throw Exception('Failed to create User');
-    // }
+    if (response.statusCode == 201) {
+      return User.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to create User');
+    }
   }
 }

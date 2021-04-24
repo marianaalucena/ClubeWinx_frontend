@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:homemate/ListProfilesPage.dart';
+import 'ProfilesListPage.dart';
+import 'ProfileConnectionsList.dart';
 import 'announcement/MyAnnouncementPage.dart';
 
 import 'announcement/NewAnnouncementPage.dart';
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             break;
             case 1:  Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ListProfilePage())
+              MaterialPageRoute(builder: (context) => ListConnectionsProfile()),
             );
             break;
             case 2:  Navigator.push(
@@ -56,6 +57,11 @@ class _HomePageState extends State<HomePage> {
             case 3:  Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+            break;
+            case 4:  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilesListPage()),
             );
             break;
 
@@ -76,6 +82,11 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             title: Text("Perfil"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text("Descobrir"),
+
           ),
         ],
       ),
