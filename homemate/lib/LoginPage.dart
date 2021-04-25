@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/HomePage.dart';
+import 'package:homemate/ProfilePage.dart';
 import 'package:homemate/RegisterPage.dart';
 import 'package:homemate/ResetPasswordPage.dart';
 
@@ -169,7 +170,23 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  _clickButton() {
+  _alert(String msg){
+    showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Login"),
+            content: Text(msg),
+            actions: <Widget>[
+              FlatButton(onPressed: (){
+                Navigator.pop(context);
+              }, child: Text("Ok"))
+            ],
+          );
+        });
+  }
+
+  _clickButton() async {
     if(_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
@@ -178,13 +195,19 @@ class _LoginPageState extends State<LoginPage> {
       print("email: $email senha: $password");
 
       //chamando a API
-      var response = LoginAPI.login(email, password);
+      var userLogin = await LoginAPI.login(email, password);
 
-      //falta implementar o if que dependera do response acima
-         Navigator.push(
-           context,
-           MaterialPageRoute(builder: (context) => HomePage()),
-         );
+      if(userLogin != null){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } else{
+     //   ScaffoldMessenger.of(context)
+     //     ..removeCurrentSnackBar()
+     //     ..showSnackBar(SnackBar(content: Text("Login Inválido")));
+        _alert("Login Inválido");
+      }
 
     } else {
       _autoValidate = true;

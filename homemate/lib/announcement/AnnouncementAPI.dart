@@ -26,7 +26,6 @@ class AnnouncementAPI{
       "energy" : _energy,
       "internet" : _internet
 
-
     };
     var _body = json.encode(params);
     print("json enviado : $_body");
