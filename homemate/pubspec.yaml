@@ -63,6 +63,12 @@ flutter:
     - images/download.png
     - images/homemate.png
     - images/person.png
+    - images/Gabriel Alves.jpeg
+    - images/Helena Dantas.jpeg
+    - images/Mariana Lucena.jpeg
+    - images/Thais Toscano.jpeg
+    - images/Thaynnara Goncalves.jpeg
+    - images/Wesley Santos.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

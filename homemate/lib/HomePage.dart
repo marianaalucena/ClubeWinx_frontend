@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
             title: Text("Perfil"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.explore),
             title: Text("Descobrir"),
 
           ),

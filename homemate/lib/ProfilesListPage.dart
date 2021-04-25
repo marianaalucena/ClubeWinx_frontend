@@ -9,18 +9,12 @@ class ProfilesListPage extends StatefulWidget {
 
 class _ProfilesListPageState extends State<ProfilesListPage> {
   List<FakeProfile> profiles = [
-    FakeProfile("Gabriel Alves, Masculino, 23 anos", "Av. Vinte e Sete de julho 1400", "<PetFriendly> <Cinéfolo> <HomeOffice>"),
-    FakeProfile("Helena Dantas, Feminino, 20 anos", "Rua Rio Grande do Sul, 13", "<Lgbt> <Animes> <UFCG>"),
-    FakeProfile("Mariana Lucena, Feminino, 25 anos", "Rua Siqueira Campos, 150", "<Literatura> <HomeOffice> <f1>"),
-    FakeProfile("Thaynnara Gonçalves, Feminino, 19 anos", "Rua Desembargador Trindade, 33", "<League of Legends> <Arte> <Fotografia>"),
-    FakeProfile("Thais Toscano, Feminino, 22 anos", "Rua Afonso Campos, 345", "<Músico> <UFCG> <Poesia>"),
-    FakeProfile("Wesley Santos, Masculino, 26 anos", "Av. Joaquim Caroca 131", "<UEPB> <EleNao> <Kpop>"),
-    FakeProfile("Victor Fernandes, Masculino, 23 anos", "Av. Vinte e Sete de julho 1400", "<PetFriendly> <Cinéfolo> <HomeOffice>"),
-    FakeProfile("Juan Victor, Masculino, 20 anos", "Rua Rio Grande do Sul, 13", "<Lgbt> <Animes> <UFCG>"),
-    FakeProfile("Sabrina Silva , Feminino, 25 anos", "Rua Siqueira Campos, 150", "<Literatura> <HomeOffice> <f1>"),
-    FakeProfile("Maria Isabel, Feminino, 19 anos", "Rua Desembargador Trindade, 33", "<League of Legends> <Arte> <Fotografia>"),
-    FakeProfile("Milena Duarte, Feminino, 22 anos", "Rua Afonso Campos, 345", "<Músico> <UFCG> <Poesia>"),
-    FakeProfile("Carlos Augusto, Masculino, 26 anos", "Av. Joaquim Caroca 131", "<UEPB> <EleNao> <Kpop>"),
+    FakeProfile("Gabriel Alves, Masculino, 23 anos", "Av. Vinte e Sete de julho 1400", "<PetFriendly> <Cinema> <HomeOffice>", "images/Gabriel Alves.jpeg"),
+    FakeProfile("Helena Dantas, Feminino, 20 anos", "Rua Rio Grande do Sul, 13", "<Lgbt> <Animes> <UFCG>", "images/Helena Dantas.jpeg"),
+    FakeProfile("Mariana Lucena, Feminino, 25 anos", "Rua Siqueira Campos, 150", "<Literatura> <HomeOffice> <f1>", "images/Mariana Lucena.jpeg"),
+    FakeProfile("Thais Toscano, Feminino, 22 anos", "Rua Afonso Campos, 345", "<Músico> <UFCG> <Poesia>", "images/Thais Toscano.jpeg"),
+    FakeProfile("Thaynnara Gonçalves, Feminino, 19 anos", "Rua Desembargador Trindade, 33", "<League of Legends> <Arte> <Fotografia>", "images/Thaynnara Goncalves.jpeg"),
+    FakeProfile("Wesley Santos, Masculino, 26 anos", "Av. Joaquim Caroca 131", "<UEPB> <EleNao> <Kpop>", "images/Wesley Santos.jpeg"),
   ];
 
   @override
@@ -32,41 +26,75 @@ class _ProfilesListPageState extends State<ProfilesListPage> {
         centerTitle: true,
         backgroundColor: Color.fromRGBO(133, 102, 170, 4)
       ),
-      body: Column(
+      body: ListView(
         children: profiles.map((profile) => fakeProfileTemplate(profile)).toList(),
       ),
     );
   }
 
   Widget fakeProfileTemplate(profile) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+    return Center(
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Wrap(
-          children: <Widget>[
-            Text(
-              profile.firstPart,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey[600],
-              ),
+        padding: const EdgeInsets.all(10.0),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          elevation: 12,
+          shadowColor: Color.fromRGBO(133, 102, 170, 4),
+          shape: 
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: InkWell(
+            onTap: (){},
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Ink.image(
+                      height: 200,
+                      // image: AssetImage('images/${imagePath}.jpeg'),
+                      image: AssetImage(profile.imagePath),
+                      fit: BoxFit.fitWidth,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(profile.firstPart,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(profile.secondPart),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(profile.thirdPart,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w200
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Ver Perfil', style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4))),
+                    Text('Solicitar Conexão', style: TextStyle(color: Color.fromRGBO(133, 102, 170, 4)))
+                  ],
+                )
+              ],
             ),
-            Text(
-              profile.secondPart,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey[600],
-              ),
-            ),
-            Text(
-              profile.thirdPart,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey[400],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -79,8 +107,9 @@ class FakeProfile {
   String firstPart;
   String secondPart;
   String thirdPart;
+  String imagePath;
 
-  FakeProfile(this.firstPart, this.secondPart, this.thirdPart);
+  FakeProfile(this.firstPart, this.secondPart, this.thirdPart, this.imagePath);
 }
 
 
