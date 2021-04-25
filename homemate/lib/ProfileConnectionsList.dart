@@ -9,12 +9,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 enum OrderOptions {orderaz, orderza}
 
-class ListConnectionsProfile extends StatefulWidget {
+class ProfileConnectionsList extends StatefulWidget {
   @override
-  _ListConnectionsProfileState createState() => _ListConnectionsProfileState();
+  _ProfileConnectionsListState createState() => _ProfileConnectionsListState();
 }
 
-class _ListConnectionsProfileState extends State<ListConnectionsProfile> {
+class _ProfileConnectionsListState extends State<ProfileConnectionsList> {
 
   ProfileHelper helper = ProfileHelper();
 

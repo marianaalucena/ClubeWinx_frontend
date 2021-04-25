@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../ListProfilesPage.dart';
+import '../ProfileConnectionsList.dart';
 import '../ProfilePage.dart';
 
 class MyAnnouncementPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _MyAnnouncementPageState extends State<MyAnnouncementPage> {
             break;
             case 1:  Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ListProfilePage())
+                MaterialPageRoute(builder: (context) => ProfileConnectionsList()),
             );
             break;
             case 2:  Navigator.push(
