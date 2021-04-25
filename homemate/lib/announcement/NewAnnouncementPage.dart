@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'AnnouncementAPI.dart';
@@ -38,10 +40,7 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
-            },
+            onPressed: _clickButton,
           ),
         ],
       ),
@@ -60,10 +59,10 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image:  AssetImage("images/person.png"),
-                     //   image: _image != null ?
-                     //   FileImage(File(_image)) :
-                     //   AssetImage("images/person.png"),
-                      //  fit: BoxFit.cover
+                      //  image: _image != null ?
+                       // Image.file(_image) :
+                        //AssetImage("images/person.png"),
+                        //fit: BoxFit.cover
                     ),
                   ),
                 ),
@@ -75,6 +74,14 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
                     });
                   });
                 },
+
+                //body: new Container(
+                //           color: Colors.grey[200],
+                //           child: Image.file(
+                //              new File('/storage/emulated/0/Download/forest.jpg')),
+                //           alignment: Alignment.center,
+                //         ),
+
               ),
              Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
@@ -376,6 +383,24 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
       _autoValidate = true;
     }
 
-
   }
+
+_receberMidia() {
+     if (_image == null) {
+       return Container(
+         child: Icon(Icons.add_photo_alternate, size: 50, color: Colors.black),
+         width: 200,
+         height: 150,
+       );
+     } else {
+       return Column(
+         children: <Widget>[
+         //  Container(child: Image.file(_image), width: 200, height: 150),
+          // Icon(Icons.photo_camera, size: 20, color: Colors.red),
+         ],
+       );
+     }
+   }
+
+
 }
