@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             break;
             case 1:  Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ListConnectionsProfile()),
+              MaterialPageRoute(builder: (context) => ProfileConnectionsList()),
             );
             break;
             case 2:  Navigator.push(
