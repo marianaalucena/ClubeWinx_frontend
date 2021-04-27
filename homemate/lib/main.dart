@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'HomemateSplash.dart';
 
 
-void main (){
+void main () {
   runApp(MaterialApp(
     home: HomemateSplash(),
     debugShowCheckedModeBanner: false,
