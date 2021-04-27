@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'UserAPI.dart';
+import 'service/UserAPI.dart';
 import 'model/User.dart';
 
 class ProfilesListPage extends StatefulWidget {

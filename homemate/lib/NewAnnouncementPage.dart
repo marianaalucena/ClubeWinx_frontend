@@ -2,10 +2,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'AnnouncementAPI.dart';
+import 'package:homemate/model/Announcement.dart';
+import 'service/AnnouncementAPI.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../HomePage.dart';
+import 'HomePage.dart';
 import 'MyAnnouncementPage.dart';
 
 class NewAnnouncementPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class NewAnnouncementPage extends StatefulWidget {
 }
 
 class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
+  Announcement announcement = new Announcement();
   final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
   final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
@@ -367,6 +369,18 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
       String state = _stateController.text;
       String value = _valueController.text;
 
+     announcement.description = description;
+     announcement.residents = residents;
+     announcement.cep = cep;
+     announcement.street = street;
+     announcement.district = district;
+     announcement.city = city;
+     announcement.state = state;
+     announcement.value = value;
+     announcement.water = _water;
+     announcement.energy = _energy;
+     announcement.internet = _internet;
+
       print("path image: $_image, descrição: $description, número de moradores: $residents, cep: $cep, rua: $street, bairro: $district, cidade: $city, estado: $state, valor: $value, incluso no valor: água - $_water, energia - $_energy e internet - $_internet");
 
 
@@ -376,8 +390,10 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
       //falta implementar o if que dependera do response acima
       Navigator.push(
         context,
-       MaterialPageRoute(builder: (context) => MyAnnouncementPage()),
+       MaterialPageRoute(builder: (context) => MyAnnouncementPage(announcement: announcement)),
       );
+
+
 
     } else {
       _autoValidate = true;

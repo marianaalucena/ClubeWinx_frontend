@@ -1,64 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="CUSTOM_SCOPE_NAME" value="All Places" />
-  </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
-  </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:escopo" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b6f91a2-4ab7-417f-9183-f84d405076b7" name="Default Changelist" comment="">
-<<<<<<< HEAD
-      <change afterPath="$PROJECT_DIR$/homemate/lib/ListProfilesPage.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homemate/lib/Profile_helper.dart" afterDir="false" />
+    <list default="true" id="7b009799-e1e4-4b4a-a1b7-898dac088d22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ClubeWinx_frontend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/ProfilePage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homemate/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homemate/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/pubspec.yaml" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/homemate/lib/HomePage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/HomePage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/homemate/lib/LoginPage.dart" afterDir="false" />
->>>>>>> de3650268fdc73ffb89b64939462e04e1e07f3bf
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-<<<<<<< HEAD
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
-=======
->>>>>>> de3650268fdc73ffb89b64939462e04e1e07f3bf
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1qUewLmyjahleXvOJPbX8Z8eMP9" />
+  <component name="ProjectId" id="1rgUxkNVIjBAtaRsbpzH6fsB7si" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -67,133 +33,67 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/homemate" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Pedrinho Som\Documents\ClubeWinx_frontend\homemate\lib" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Flutter.main.dart">
-    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
-      <option name="filePath" value="$PROJECT_DIR$/homemate/lib/main.dart" />
-      <method v="2" />
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="C:/Users/mylen/Documents/ClubeWinx_frontend/homemate/android/app/build.gradle" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/homemate/android/app/build.gradle" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
+    <configuration name="Specifications" type="executeSpecs" factoryName="Gauge Execution">
+      <setting name="environment" value="" />
+      <setting name="specsToExecute" value="" />
+      <setting name="tags" value="" />
+      <setting name="parallelNodes" value="" />
+      <setting name="execInParallel" value="false" />
+      <setting name="programParameters" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="moduleName" value="ClubeWinx_frontend" />
+      <envMap />
+      <setting name="rowsRange" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <list>
-      <item itemvalue="Flutter.main.dart" />
-      <item itemvalue="Gradle.C:/Users/mylen/Documents/ClubeWinx_frontend/homemate/android/app/build.gradle" />
-    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1b6f91a2-4ab7-417f-9183-f84d405076b7" name="Default Changelist" comment="" />
-      <created>1617138832623</created>
+      <changelist id="7b009799-e1e4-4b4a-a1b7-898dac088d22" name="Default Changelist" comment="" />
+      <created>1619397474226</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1617138832623</updated>
+      <updated>1619397474226</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="434" y="60" key="#Inspections" timestamp="1617156690707">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="95" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619398885758">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="309" y="42" key="#Inspections/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617149584636" />
-    <state x="434" y="60" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1617156690707" />
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617151458714">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="95" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1619398885758" />
+    <state x="321" y="81" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1619397955157">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617151458713" />
-    <state x="412" y="154" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1617151448816">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="321" y="81" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.690@0.0.1280.690" timestamp="1619397955157" />
+    <state x="93" y="93" width="1094" height="504" key="AVDManager" timestamp="1619397966633">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="412" y="154" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617151448816" />
-    <state x="100" y="100" width="1166" height="528" key="AVDManager" timestamp="1617151042225">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="93" y="93" width="1094" height="504" key="AVDManager/0.0.1280.690@0.0.1280.690" timestamp="1619397966633" />
+    <state x="421" y="93" key="FileChooserDialogImpl" timestamp="1619398954504">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="100" y="100" width="1166" height="528" key="AVDManager/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617151042225" />
-    <state x="502" y="110" key="AndroidProcessChooserDialog" timestamp="1617152665962">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="421" y="93" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1619398954504" />
+    <state x="311" y="56" key="NewModule_or_Project.wizard" timestamp="1619398957705">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="502" y="110" key="AndroidProcessChooserDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617152665962" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1617154278958">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617154278958" />
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1618347020528">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1306" height="167" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007561" />
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
-    <state width="486" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1618347020528">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1306" height="167" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007559" />
-    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
-    <state width="486" height="258" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1618347020528">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1306" height="167" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007559" />
-    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
-    <state width="486" height="258" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1618347020528">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1306" height="167" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617155007560" />
-    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618347020528" />
-    <state width="486" height="258" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1617157262683" />
-    <state x="259" y="13" key="SettingsEditor" timestamp="1617156649696">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617154280650" />
-    <state x="259" y="13" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1617156649696" />
-    <state x="0" y="0" width="585" height="728" key="find.popup" timestamp="1617154310183">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="0" y="0" width="585" height="728" key="find.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617154310183" />
-    <state x="339" y="164" key="run.anything.popup" timestamp="1617150993918">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="164" key="run.anything.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1617150993918" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ClubeWinx_frontend$C__Users_mylen_Documents_ClubeWinx_frontend_homemate_android_app_build_gradle.ic" NAME="$PROJECT_DIR$/homemate/android/app/build.gradle Coverage Results" MODIFIED="1617150897395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <state x="311" y="56" key="NewModule_or_Project.wizard/0.0.1280.690@0.0.1280.690" timestamp="1619398957705" />
   </component>
 </project>

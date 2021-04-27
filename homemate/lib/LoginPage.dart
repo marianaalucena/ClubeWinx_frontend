@@ -8,7 +8,7 @@ import 'package:homemate/ProfilePage.dart';
 import 'package:homemate/RegisterPage.dart';
 import 'package:homemate/ResetPasswordPage.dart';
 
-import 'LoginAPI.dart';
+import 'service/LoginAPI.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -194,20 +194,25 @@ class _LoginPageState extends State<LoginPage> {
       String password = _passwordController.text;
       print("email: $email senha: $password");
 
-      //chamando a API
-      var userLogin = await LoginAPI.login(email, password);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
 
-      if(userLogin != null){
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-      } else{
+      //chamando a API
+   //   var userLogin = await LoginAPI.login(email, password);
+
+    //  if(userLogin != null){
+    //    Navigator.push(
+    //      context,
+     //     MaterialPageRoute(builder: (context) => HomePage()),
+     //   );
+    //  } else{
      //   ScaffoldMessenger.of(context)
      //     ..removeCurrentSnackBar()
      //     ..showSnackBar(SnackBar(content: Text("Login Inválido")));
-        _alert("Login Inválido");
-      }
+     //   _alert("Login Inválido");
+     // }
 
     } else {
       _autoValidate = true;

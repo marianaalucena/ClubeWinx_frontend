@@ -7,6 +7,9 @@ import 'ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'ProfilesListPage.dart';
+import 'MyAnnouncementPage.dart';
+
 enum OrderOptions {orderaz, orderza}
 
 class ProfileConnectionsList extends StatefulWidget {
@@ -19,6 +22,7 @@ class _ProfileConnectionsListState extends State<ProfileConnectionsList> {
   ProfileHelper helper = ProfileHelper();
 
   List<Profile> profiles = List();
+  int index = 0;
 
   @override
   void initState() {
@@ -33,6 +37,15 @@ class _ProfileConnectionsListState extends State<ProfileConnectionsList> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(133, 102, 170, 4),
         title: Text("Minhas Conexões"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage())
+            );
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
@@ -49,7 +62,7 @@ class _ProfileConnectionsListState extends State<ProfileConnectionsList> {
           _showProfilePage();
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
       ),
       body: ListView.builder(
           padding: EdgeInsets.all(10.0),
@@ -57,6 +70,57 @@ class _ProfileConnectionsListState extends State<ProfileConnectionsList> {
           itemBuilder: (context, index) {
             return _profileCard(context, index);
           }
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            this.index = index;
+          });
+          switch (index){
+            case 0:  Navigator.of(context).pushNamed('/medical centre');
+            break;
+            case 1:  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfileConnectionsList()),
+            );
+            break;
+            case 2:
+            break;
+            case 3:  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+            break;
+            case 4:  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilesListPage()),
+            );
+            break;
+
+          }
+
+        },
+        currentIndex: index,
+        items: [
+          BottomNavigationBarItem(
+              backgroundColor: Color.fromRGBO(133, 102, 170, 4),
+              icon: Icon(Icons.house_outlined), title: Text("Inicio")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.wc), title: Text("Conexões")),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment_rounded),
+            title: Text("Meu anúncio"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Perfil"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            title: Text("Descobrir"),
+
+          ),
+        ],
       ),
     );
   }

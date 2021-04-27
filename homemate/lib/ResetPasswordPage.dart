@@ -96,13 +96,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     }
   }
 
-  void _formToJson() {
-    Map<String, dynamic> loginUser = Map();
-    loginUser["email"] = _emailController.text;
-    String json = jsonEncode(loginUser);
 
-    print(json);
-  }
 
   @override
   void dispose() {
@@ -112,7 +106,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   void _clickButton() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      _formToJson();
+
+      String email = _emailController.text;
+      print("email: $email");
+
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => NewPasswordPage()),
