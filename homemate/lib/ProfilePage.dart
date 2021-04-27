@@ -1,16 +1,21 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/EditProfilePage.dart';
 import 'package:homemate/HomePage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'Profile_helper.dart';
+import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
+import 'package:homemate/ProfileAPI.dart';
+import 'package:homemate/model/User.dart';
+
 
 class ProfilePage extends StatefulWidget {
   final Profile profile;
+
 
   ProfilePage({this.profile});
 
@@ -31,9 +36,28 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Profile _editedProfile;
 
+  List data;
+  Future<String> showUser() async {
+    final response = await http.get(
+      Uri.http('177.37.145.136:3000', '/user'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+
+    );
+    print(response.body);
+
+    data =  json.decode(response.body);
+
+    return 'Failed to show User';
+
+  }
+
   @override
   void initState() {
     super.initState();
+
+    this.showUser();
 
     if(widget.profile == null){
       _editedProfile = Profile();
@@ -45,6 +69,8 @@ class _ProfilePageState extends State<ProfilePage> {
       _phoneController.text = _editedProfile.phone;
     }
   }
+
+
   final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
 
 
@@ -124,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 32),
-                    child: Text('Clube Winx',
+                    child:Text(_listView(),
                       style: TextStyle(
                           color: Color.fromRGBO(244, 244, 244, 5),
                           fontSize: 24,
@@ -140,6 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
+                           
                             IconButton(
                               icon: Icon(Icons.email_outlined, color: Color.fromRGBO(244, 244, 244, 5),),
                               onPressed: (){},
@@ -208,6 +235,21 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+    );
+  }
+
+  _listView() {
+    return ListView.builder(
+      itemCount: 1,
+      itemBuilder: (context, index) {
+        return _showName(data[index]);
+      },
+    );
+  }
+
+  _showName(dynamic item){
+    return ListTile(
+      title: Text(item['name']),
     );
   }
 }

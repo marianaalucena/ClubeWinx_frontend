@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/ProfilePage.dart';
-
-
+import 'package:homemate/EditUserAPI.dart';
+import 'package:homemate/model/User.dart';
 
 
 class EditProfilePage extends StatefulWidget {
@@ -15,6 +15,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();      //cria uma chave global que identifica unicamente o Form
   bool _autoValidate = false;
   var _selectedGender;
+  EditUserAPI api = EditUserAPI();
+  Future<User> _futureUser;
+  Map<String, String> _userInformation = {};
   final String url = 'https://capricho.abril.com.br/wp-content/uploads/2018/03/netflix-lancar-serie-live-action-clube-winx.jpg?quality=85&strip=info&crop=0px%2C266px%2C795px%2C541px&resize=680%2C453';
 
   TextEditingController _nameController = TextEditingController();
@@ -218,10 +221,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
             IconButton(
               icon: Icon(Icons.check),
               onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProfilePage())
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                setState(() {
+                  _futureUser = api.editUser(_userInformation);
+                });
               },
             ),
           ],
@@ -284,6 +287,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
           child: TextFormField(
             controller: _nameController,
             validator: _validateName,
+            onSaved: (value) {
+              _userInformation['name'] = value;
+            },
             autofocus: true,
             keyboardType: TextInputType.text,
             style: TextStyle(color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),

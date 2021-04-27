@@ -194,6 +194,11 @@ class _LoginPageState extends State<LoginPage> {
       String password = _passwordController.text;
       print("email: $email senha: $password");
 
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage())
+      );
+
       //chamando a API
       var userLogin = await LoginAPI.login(email, password);
 

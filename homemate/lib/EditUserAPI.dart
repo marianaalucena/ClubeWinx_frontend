@@ -2,10 +2,10 @@ import 'package:http/http.dart' as http;
 import 'package:homemate/model/User.dart';
 import 'dart:convert';
 
-class UserAPI {
-  Future<User> createUser(Map<String, String> form) async {
-    final response = await http.post(
-        Uri.http('177.37.145.136:3000', '/user'),
+class EditUserAPI {
+  Future<User> editUser(Map<String, String> form) async {
+    final response = await http.put(
+        Uri.http('177.37.145.136:3000', '/user/{userId}'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -30,7 +30,7 @@ class UserAPI {
     if (response.statusCode == 201) {
       return User.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to create User');
+      throw Exception('Failed to edit User');
     }
   }
 }
