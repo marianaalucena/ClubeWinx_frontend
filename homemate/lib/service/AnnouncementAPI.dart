@@ -1,41 +1,48 @@
 import 'dart:convert';
 
 import 'package:homemate/LoginPage.dart';
+import 'package:homemate/model/Announcement.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AnnouncementAPI{
 
-  static Future<bool> addAnnouncement(String image, String description, String residents, String cep, String street, String district, String city, String state, String value, bool _water, bool _energy, bool _internet) async {
+  static Future<Announcement> addAnnouncement(String image, String description, String residents, String value, bool water, bool energy, bool internet) async {
 
     //URL da API
-    var url = 'https://example.com/whatsit/create';
+    var response = await http.post(
+        Uri.http('192.168.0.104:3000', '/auth/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: json.encode(<String, String>{
+          "image" : image,
+          "description" : description,
+          "residents" : residents,
+          "value" : value,
+    //      "water" : water,
+    //      "energy" : energy,
+     //     "internet" : internet
+        })
 
-    var header = {"Content-Type": "application/json"};
+    );
 
-    Map params = {
-      "image" : image,
-      "description" : description,
-      "residents" : residents,
-      "cep" : cep,
-      "street" : street,
-      "district" : district,
-      "city" : city,
-      "state" : state,
-      "value" : value,
-      "water" : _water,
-      "energy" : _energy,
-      "internet" : _internet
+    var announcement;
+    var prefs = await SharedPreferences.getInstance();
 
-    };
-    var _body = json.encode(params);
-    print("json enviado : $_body");
+    print('Response status: ${response.statusCode}'); //200 - ok
 
-    var response = await http.post(url, headers: header, body: _body);
+    Map mapResponse = json.decode(response.body);
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if(response.statusCode == 200){
+      announcement = Announcement.fromJson(mapResponse);
+      prefs.setString("token", mapResponse["token"]);  //persistindo o valor do token
+    } else {
+      announcement = null;
+    }
 
-    print(await http.read('https://example.com/foobar.txt'));
-    return true;
-  }
+    return announcement;
+
+    }
+
 }

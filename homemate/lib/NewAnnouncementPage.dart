@@ -26,11 +26,7 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
   String _image = "";
   final _descriptionController = TextEditingController();
   final _residentsController = TextEditingController();
-  final _streetController = TextEditingController();
-  final _districtController = TextEditingController();
-  final _stateController = TextEditingController();
   final _valueController = TextEditingController();
-  final _cepController = TextEditingController();
   final _cityController = TextEditingController();
 
   @override
@@ -118,83 +114,6 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
                       hintText: 'Ex: 2',
                       hintStyle:
                           TextStyle(fontWeight: FontWeight.w200, fontSize: 13)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: _cepController,
-                  validator: _validateCep,
-                  autofocus: true,
-                  keyboardType: TextInputType.numberWithOptions(signed: true),
-                  style: TextStyle(
-                      color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                  decoration: InputDecoration(
-                      labelText: "CEP",
-                      labelStyle: TextStyle(color: Colors.black),
-                      hintText: 'Ex: 58429-120',
-                      hintStyle:
-                          TextStyle(fontWeight: FontWeight.w200, fontSize: 13)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: _streetController,
-                  validator: _validate,
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                  decoration: InputDecoration(
-                    labelText: "Rua *",
-                    labelStyle: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: _districtController,
-                  validator: _validate,
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                  decoration: InputDecoration(
-                    labelText: "Bairro *",
-                    labelStyle: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: _cityController,
-                  validator: _validate,
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                  decoration: InputDecoration(
-                    labelText: "Cidade *",
-                    labelStyle: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: TextFormField(
-                  controller: _stateController,
-                  validator: _validate,
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(
-                      color: Color.fromRGBO(105, 131, 170, 2), fontSize: 15),
-                  decoration: InputDecoration(
-                    labelText: "Estado *",
-                    labelStyle: TextStyle(color: Colors.black),
-                  ),
                 ),
               ),
               Padding(
@@ -362,30 +281,21 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
 
       String description = _descriptionController.text;
       String residents = _residentsController.text;
-      String cep = _cepController.text;
-      String street = _streetController.text;
-      String district = _districtController.text;
       String city = _cityController.text;
-      String state = _stateController.text;
       String value = _valueController.text;
 
      announcement.description = description;
      announcement.residents = residents;
-     announcement.cep = cep;
-     announcement.street = street;
-     announcement.district = district;
-     announcement.city = city;
-     announcement.state = state;
      announcement.value = value;
      announcement.water = _water;
      announcement.energy = _energy;
      announcement.internet = _internet;
 
-      print("path image: $_image, descrição: $description, número de moradores: $residents, cep: $cep, rua: $street, bairro: $district, cidade: $city, estado: $state, valor: $value, incluso no valor: água - $_water, energia - $_energy e internet - $_internet");
+      print("path image: $_image, descrição: $description, número de moradores: $residents, valor: $value, incluso no valor: água - $_water, energia - $_energy e internet - $_internet");
 
 
       //chamando a API
-      var response = AnnouncementAPI.addAnnouncement(_image, description, residents, cep, street, district, city, state, value, _water, _energy, _internet);
+      var response = AnnouncementAPI.addAnnouncement(_image, description, residents, value, _water, _energy, _internet);
 
       //falta implementar o if que dependera do response acima
       Navigator.push(

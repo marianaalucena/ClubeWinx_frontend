@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/NewPasswordPage.dart';
 
+
 class ResetPasswordPage extends StatefulWidget {
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
@@ -103,13 +104,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     _emailController.dispose();
   }
 
-  void _clickButton() {
+  _clickButton() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
       String email = _emailController.text;
       print("email: $email");
-
 
       Navigator.push(
         context,
