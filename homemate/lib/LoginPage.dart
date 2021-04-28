@@ -7,6 +7,7 @@ import 'package:homemate/HomePage.dart';
 import 'package:homemate/ProfilePage.dart';
 import 'package:homemate/RegisterPage.dart';
 import 'package:homemate/ResetPasswordPage.dart';
+import 'package:homemate/model/UserLogin.dart';
 
 import 'service/LoginAPI.dart';
 
@@ -186,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
         });
   }
 
-  _clickButton() async {
+  _clickButton() {
     if(_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
@@ -194,25 +195,28 @@ class _LoginPageState extends State<LoginPage> {
       String password = _passwordController.text;
       print("email: $email senha: $password");
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => HomePage()),
+      // );
 
       //chamando a API
-   //   var userLogin = await LoginAPI.login(email, password);
+      final userLogin = LoginAPI.login(email, password);
 
-    //  if(userLogin != null){
-    //    Navigator.push(
-    //      context,
-     //     MaterialPageRoute(builder: (context) => HomePage()),
-     //   );
-    //  } else{
-     //   ScaffoldMessenger.of(context)
-     //     ..removeCurrentSnackBar()
-     //     ..showSnackBar(SnackBar(content: Text("Login Inválido")));
-     //   _alert("Login Inválido");
-     // }
+      userLogin.then((userLogin) {
+        if(userLogin == null){
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Login Inválido")));
+          _alert("Login Inválido");
+
+        } else{
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        }
+      });
 
     } else {
       _autoValidate = true;
