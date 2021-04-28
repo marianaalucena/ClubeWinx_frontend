@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'HomePage.dart';
 import 'service/UserAPI.dart';
 import 'model/User.dart';
 
@@ -24,8 +25,18 @@ class _ProfilesListPageState extends State<ProfilesListPage> {
       appBar: AppBar(
         title: Text("Perfis Sugeridos"),
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(133, 102, 170, 4)
+        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage())
+            );
+          },
+        ),
       ),
+
       body: ListView(
         children: profiles.map((profile) => fakeProfileTemplate(profile)).toList(),
       ),

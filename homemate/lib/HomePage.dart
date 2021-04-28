@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/AnnouncementPageList.dart';
+import 'package:homemate/MyFakeAnnouncementPage.dart';
 import 'ProfilesListPage.dart';
 import 'ProfileConnectionsList.dart';
 import 'MyAnnouncementPage.dart';
@@ -13,85 +15,49 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int index = 0;
+  int _index = 0;
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [
+      AnnouncementPageList(),
+      ProfileConnectionsList(),
+      MyFakeAnnouncementPage(),
+      ProfilePage(),
+      ProfilesListPage()
+    ];
+
     return Scaffold(
-    backgroundColor: Color.fromRGBO(244, 244, 244, 5),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
-        title: Text("Anúncios"),
-        centerTitle: true,
+      backgroundColor: Color.fromRGBO(244, 244, 244, 5),
+      body: Container(
+        child: pages[_index]
+      ),
 
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _clickButton,
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromRGBO(133, 102, 170, 4),
-      ),
-      body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-        ]),
-      ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (int index) {
+        onTap: (index) {
           setState(() {
-            this.index = index;
+            _index = index;
           });
-          switch (index){
-            case 0:  Navigator.of(context).pushNamed('/medical centre');
-            break;
-            case 1:  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileConnectionsList()),
-            );
-            break;
-            case 2:
-            break;
-            case 3:  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            );
-            break;
-            case 4:  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilesListPage()),
-            );
-            break;
-
-          }
 
         },
-        currentIndex: index,
+        currentIndex: _index,
+        type: BottomNavigationBarType.fixed,
+        fixedColor: Color.fromRGBO(133, 102, 170, 4),
         items: [
           BottomNavigationBarItem(
-              backgroundColor: Color.fromRGBO(133, 102, 170, 4),
               icon: Icon(Icons.house_outlined), title: Text("Inicio")),
           BottomNavigationBarItem(
               icon: Icon(Icons.wc), title: Text("Conexões")),
           BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_rounded),
-            title: Text("Meu anúncio"),
+            icon: Icon(Icons.assignment_rounded), title: Text("Meu anúncio"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text("Perfil"),
+            icon: Icon(Icons.person), title: Text("Perfil"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            title: Text("Descobrir"),
-
+            icon: Icon(Icons.explore), title: Text("Descobrir"),
           ),
         ],
       ),
-    );
-  }
-
-  void _clickButton() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NewAnnouncementPage()),
     );
   }
 }

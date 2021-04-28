@@ -5,7 +5,8 @@ import 'dart:convert';
 class UserAPI {
   Future<User> createUser(Map<String, String> form) async {
     final response = await http.post(
-        Uri.http('192.168.0.104:3000', '/user'),
+        //Uri.http('192.168.0.104:3000', '/user'),
+        Uri.http('10.0.2.2:3000', '/user'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
