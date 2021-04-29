@@ -9,7 +9,7 @@ class LoginAPI{
   static Future<UserLogin> login(String email, String password) async {
     //URL da API
     var response = await http.post(
-      Uri.http('177.37.145.136:3000', '/auth/login'),
+      Uri.http('192.168.99.1:3000', '/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

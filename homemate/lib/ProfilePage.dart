@@ -11,7 +11,7 @@ import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 import 'package:homemate/ProfileAPI.dart';
 import 'package:homemate/model/User.dart';
-
+import 'package:homemate/model/UserProfile.dart';
 
 class ProfilePage extends StatefulWidget {
   final Profile profile;
@@ -33,21 +33,23 @@ class _ProfilePageState extends State<ProfilePage> {
   final _nameFocus = FocusNode();
 
   bool _userEdited = false;
-
+  List data;
   Profile _editedProfile;
 
-  List data;
+  var _userProfile = new List<UserProfile>();
   Future<String> showUser() async {
     final response = await http.get(
-      Uri.http('177.37.145.136:3000', '/user'),
+      Uri.http('http://192.168.99.100/:3000', '/profile/me'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-
     );
-    print(response.body);
+    print(_userProfile);
 
     data =  json.decode(response.body);
+    setState(() {
+      _userProfile = (data as List).map((e) => UserProfile.fromJson(e)).toList();
+    });
 
     return 'Failed to show User';
 
@@ -150,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 32),
-                    child:Text(_listView(),
+                    child:Text("Mel",
                       style: TextStyle(
                           color: Color.fromRGBO(244, 244, 244, 5),
                           fontSize: 24,
@@ -195,7 +197,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: <Widget>[
                             IconButton(
                               icon: Icon(Icons.phone, color: Color.fromRGBO(244, 244, 244, 5)),
-                              onPressed: (){},
+                              onPressed: (){
+                                showUser;
+                              },
                             ),
                             Text('Celular',
                               style: TextStyle(
