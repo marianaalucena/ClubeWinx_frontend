@@ -15,7 +15,7 @@ class _MyFakeAnnouncementPageState extends State<MyFakeAnnouncementPage> {
         backgroundColor: Color.fromRGBO(133, 102, 170, 4),
         title: Text("Meu Anúncio"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back),
           onPressed: (){
             Navigator.push(
                 context,

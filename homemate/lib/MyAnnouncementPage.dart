@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homemate/HomePage.dart';
 import 'package:homemate/NewAnnouncementPage.dart';
 import 'package:homemate/model/Announcement.dart';
 
@@ -24,119 +25,112 @@ class _MyAnnouncementPageState extends State<MyAnnouncementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage())
+            );
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit_outlined),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pop(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewAnnouncementPage())
+              );
+            },
           ),
         ],
         backgroundColor: Color.fromRGBO(133, 102, 170, 4),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(30.0),
+        padding: EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: GestureDetector(
-                child: Container(
-                  width: 300.0,
-                  height: 300.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    image: DecorationImage(
-                      image: NetworkImage(url),
-                     // image: AssetImage("images/person.png"),
-                      //  image: _image != null ?
-                      // Image.file(_image) :
-                      //AssetImage("images/person.png"),
-                      //fit: BoxFit.cover
-                    ),
-                  ),
+              child: Container(
+                margin: new EdgeInsets.only(bottom: 20),
+                child: new Material(
+                  elevation: 4.0,
+                  borderRadius: new BorderRadius.circular(6.0),
+                  child: _getImageNetwork(url),
                 ),
               ),
             ),
-            Divider(
-              color: Colors.black,
-            ),
+
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Descrição: ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: widget.announcement.description,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                        )),
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.black,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Número de moradores: ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: widget.announcement.residents,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                        )),
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.black,
-            ),
-            Text("Valor", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, left: 20),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'R\$ ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: widget.announcement.value,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                        )),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, left: 20),
-              child: Row(
+              padding: const EdgeInsets.all(19),
+              child: Column(
                 children: <Widget>[
-                  Text("Inclui: ", style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold),),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Text("R\$ ", style: TextStyle(fontSize: 30),),
+                          Text(widget.announcement.value, style: TextStyle(fontSize: 30),)
+                        ],
+                      ),
+                  ),
+                  Divider(
+                    height: 30,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child:  Text("Descrição", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(widget.announcement.description, style: TextStyle(fontSize: 17),)
+                  ),
+                  Divider(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child:  Text("Número de moradores", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(widget.announcement.residents, style: TextStyle(fontSize: 17),)
+                  ),
+                  Divider(
+                    height: 50,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: _include(),
+                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: <Widget>[
+                          _includeWater(),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          _includeEnergy(),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          _includeInternet(),
+
+                        ],
+                      ),
+                  ),
                 ],
               ),
             ),
@@ -200,21 +194,45 @@ class _MyAnnouncementPageState extends State<MyAnnouncementPage> {
     );
   }
 
-  String _includeEnergy(){
+  Widget _getImageNetwork(url){
+
+    return new Container(
+        height: 200.0,
+        child: new Image.network(
+            url,
+            fit: BoxFit.cover)
+    );
+
+  }
+
+  _includeEnergy(){
     if(widget.announcement.energy){
-      return "energia";
+      return Text("Energia", style: TextStyle(fontSize: 17),);
+    } else{
+      return Text("");
     }
   }
 
-  String _includeWater(){
+  _includeWater(){
     if(widget.announcement.water){
-      return "água";
+      return Text("Água", style: TextStyle(fontSize: 17),);
+    } else{
+      return Text("");
     }
   }
 
-  String _includeInternet(){
+  _includeInternet(){
     if(widget.announcement.internet){
-      return "internet";
+      return Text("Internet", style: TextStyle(fontSize: 17),);
+    } else{
+      return Text("");
     }
   }
+  _include(){
+    if(widget.announcement.internet || widget.announcement.water || widget.announcement.energy){
+      return Text("Está incluso no valor", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),);
+    }
+
+
+}
 }

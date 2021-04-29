@@ -195,28 +195,28 @@ class _LoginPageState extends State<LoginPage> {
       String password = _passwordController.text;
       print("email: $email senha: $password");
 
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HomePage()),
-      // );
+      Navigator.push(
+         context,
+         MaterialPageRoute(builder: (context) => HomePage()),
+       );
 
       //chamando a API
-      final userLogin = LoginAPI.login(email, password);
+     // final userLogin = LoginAPI.login(email, password);
 
-      userLogin.then((userLogin) {
-        if(userLogin == null){
-          ScaffoldMessenger.of(context)
-            ..removeCurrentSnackBar()
-            ..showSnackBar(SnackBar(content: Text("Login Inválido")));
-          _alert("Login Inválido");
+      //userLogin.then((userLogin) {
+       // if(userLogin == null){
+        //  ScaffoldMessenger.of(context)
+         //   ..removeCurrentSnackBar()
+          //  ..showSnackBar(SnackBar(content: Text("Login Inválido")));
+          //_alert("Login Inválido");
 
-        } else{
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        }
-      });
+      //  } else{
+      //    Navigator.push(
+      //      context,
+      //      MaterialPageRoute(builder: (context) => HomePage()),
+       //   );
+       // }
+      //});
 
     } else {
       _autoValidate = true;
