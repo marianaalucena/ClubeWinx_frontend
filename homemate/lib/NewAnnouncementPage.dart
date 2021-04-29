@@ -1,5 +1,7 @@
 
 
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homemate/model/Announcement.dart';
@@ -10,6 +12,11 @@ import 'HomePage.dart';
 import 'MyAnnouncementPage.dart';
 
 class NewAnnouncementPage extends StatefulWidget {
+
+  Announcement announcement;
+
+  NewAnnouncementPage({this.announcement});
+
   @override
   _NewAnnouncementPageState createState() => _NewAnnouncementPageState();
 }
@@ -27,14 +34,45 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
   final _descriptionController = TextEditingController();
   final _residentsController = TextEditingController();
   final _valueController = TextEditingController();
-  final _cityController = TextEditingController();
+
+
+  Announcement _editedAnnouncement;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if(widget.announcement == null){
+      _editedAnnouncement = Announcement();
+    } else{
+      _editedAnnouncement = Announcement.fromJson(widget.announcement.toJson());
+
+      _descriptionController.text = _editedAnnouncement.description;
+      _residentsController.text = _editedAnnouncement.residents;
+      _valueController.text = _editedAnnouncement.value;
+      _energy = _editedAnnouncement.energy;
+      _water = _editedAnnouncement.water;
+      _internet = _editedAnnouncement.internet;
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage())
+            );
+          },
+        ),
         backgroundColor: Color.fromRGBO(133, 102, 170, 4),
-        title: Text("Novo Anúncio"),
+        title: Text("Anúncio"),
+       // centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
@@ -281,7 +319,7 @@ class _NewAnnouncementPageState extends State<NewAnnouncementPage> {
 
       String description = _descriptionController.text;
       String residents = _residentsController.text;
-      String city = _cityController.text;
+    //  String city = _cityController.text;
       String value = _valueController.text;
 
      announcement.description = description;
